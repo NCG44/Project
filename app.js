@@ -1,23 +1,32 @@
-// Bellevue Residence Investment App - Advanced Closing Sales Interface
+// Bellevue Residence Investment App - Professional Closing Sales Interface with Transaction Analysis Data
 document.addEventListener('DOMContentLoaded', function() {
-    // Investment data for Bellevue Residence
+    // Real Transaction Analysis data from Norden Capital Group
     const data = {
+        transaction_analysis: {
+            investment_amount: 148000,
+            nightly_rate: 150,
+            occupied_nights: 146,
+            gross_rental_income: 21900,
+            operating_costs: 5040,
+            net_rental_income: 16860,
+            annual_yield: 11.7,
+            projected_exit_price: 187333,
+            capital_appreciation: 44333,
+            three_year_cashflow: 50580,
+            total_return: 94913,
+            total_return_percentage: 66.3,
+            occupancy_rate: 40 // Conservative 40% occupancy
+        },
         rental_projections: {
             months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            low_scenario: [8, 8.2, 8.5, 9.2, 10.8, 12.5, 12.8, 12.6, 11.4, 10.2, 9.1, 8.3],
-            high_scenario: [10, 10.3, 10.8, 11.8, 13.5, 15.2, 15.6, 15.3, 14.1, 12.6, 11.3, 10.5]
+            monthly_income: [1205, 1205, 1205, 1680, 2100, 2520, 2520, 2520, 2100, 1680, 1260, 1205] // Based on seasonal variation
         },
         growth_timeline: {
-            years: ['2025', '2026', '2027', '2028', '2029', '2030'],
-            cumulative_growth: [0, 8.5, 18.2, 29.8, 39.1, 49.6],
-            annual_growth: [0, 8.5, 9.7, 11.6, 9.3, 10.5]
-        },
-        investment_metrics: {
-            annual_rental_min: 8,
-            annual_rental_max: 12,
-            five_year_return: 49.6,
-            eu_membership_year: 2028,
-            construction_completion: '2026 Q2'
+            years: ['År 1', 'År 2', 'År 3'],
+            annual_cashflow: [16860, 16860, 16860],
+            cumulative_cashflow: [16860, 33720, 50580],
+            capital_appreciation: [0, 0, 44333],
+            total_value: [16860, 33720, 94913]
         }
     };
 
@@ -55,10 +64,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Handle CTA buttons differently
                 if (button.classList.contains('cta-btn')) {
                     if (button.classList.contains('primary')) {
-                        // Handle "RESERVÉR ENHED NU" action
                         showInvestmentDialog();
                     } else {
-                        // Handle "BOOK KONSULTATION" action
                         showConsultationDialog();
                     }
                 } else if (currentSection < totalSections - 1) {
@@ -208,8 +215,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Animate the metric values
                 const value = card.querySelector('.metric-value');
                 if (value && value.textContent.includes('%')) {
-                    const target = parseInt(value.textContent) || 0;
-                    animateNumber(value, target, 2500, '%');
+                    const target = parseFloat(value.textContent) || 0;
+                    animateNumber(value, target, 2500, '%', '', 1);
                 }
             }, index * 200);
         });
@@ -228,35 +235,14 @@ document.addEventListener('DOMContentLoaded', function() {
     function animateRentalProjection() {
         const projectionElement = document.querySelector('.projection-range');
         if (projectionElement) {
-            // Animate from 0% to 8-12%
-            let currentMin = 0;
-            let currentMax = 0;
-            const targetMin = data.investment_metrics.annual_rental_min;
-            const targetMax = data.investment_metrics.annual_rental_max;
-            const duration = 3000;
-            const steps = duration / 16;
-            const incrementMin = targetMin / steps;
-            const incrementMax = targetMax / steps;
-
-            const timer = setInterval(() => {
-                currentMin += incrementMin;
-                currentMax += incrementMax;
-
-                if (currentMin >= targetMin && currentMax >= targetMax) {
-                    currentMin = targetMin;
-                    currentMax = targetMax;
-                    clearInterval(timer);
-                }
-
-                projectionElement.textContent = `${Math.floor(currentMin)}-${Math.floor(currentMax)}%`;
-            }, 16);
+            animateNumber(projectionElement, data.transaction_analysis.annual_yield, 3000, '', '', 1);
         }
     }
 
     function animateGrowthPercentage() {
         const growthElement = document.querySelector('.growth-percentage');
         if (growthElement) {
-            animateNumber(growthElement, data.investment_metrics.five_year_return, 3500, '%', '', 1);
+            animateNumber(growthElement, data.transaction_analysis.total_return_percentage, 3500, '%', '', 1);
         }
     }
 
@@ -312,13 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const text = value.textContent;
                     if (text.includes('%')) {
                         const target = parseFloat(text) || 0;
-                        animateNumber(value, target, 2000, '% over 5 år', '', 1);
-                    } else if (text.includes('-')) {
-                        // Handle rental range
-                        setTimeout(() => {
-                            value.style.opacity = '1';
-                            value.style.transform = 'scale(1)';
-                        }, 500);
+                        animateNumber(value, target, 2000, '% årligt', '', 1);
                     }
                 }
             }, index * 400);
@@ -340,7 +320,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const canvas = document.getElementById('rental-income-chart');
         if (!canvas) return;
 
-        console.log('Creating rental income chart');
+        console.log('Creating rental income chart with transaction analysis data');
 
         activeCharts.rental = new Chart(canvas, {
             type: 'line',
@@ -348,27 +328,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 labels: data.rental_projections.months,
                 datasets: [
                     {
-                        label: 'Optimistisk scenario (12%)',
-                        data: data.rental_projections.high_scenario,
+                        label: 'Månedlig lejeindtægt (€)',
+                        data: data.rental_projections.monthly_income,
                         borderColor: '#d4af37',
                         backgroundColor: 'rgba(212, 175, 55, 0.1)',
                         borderWidth: 3,
                         fill: true,
                         tension: 0.4,
                         pointBackgroundColor: '#d4af37',
-                        pointBorderColor: '#ffffff',
-                        pointBorderWidth: 2,
-                        pointRadius: 6
-                    },
-                    {
-                        label: 'Konservativt scenario (8%)',
-                        data: data.rental_projections.low_scenario,
-                        borderColor: '#16a085',
-                        backgroundColor: 'rgba(22, 160, 133, 0.1)',
-                        borderWidth: 3,
-                        fill: true,
-                        tension: 0.4,
-                        pointBackgroundColor: '#16a085',
                         pointBorderColor: '#ffffff',
                         pointBorderWidth: 2,
                         pointRadius: 6
@@ -392,7 +359,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     y: { 
                         ticks: { 
                             color: '#ffffff',
-                            callback: value => value + '%'
+                            callback: value => '€' + value.toLocaleString()
                         }, 
                         grid: { color: 'rgba(255,255,255,0.1)' } 
                     }
@@ -409,27 +376,30 @@ document.addEventListener('DOMContentLoaded', function() {
         const canvas = document.getElementById('growth-timeline-chart');
         if (!canvas) return;
 
-        console.log('Creating growth timeline chart');
+        console.log('Creating growth timeline chart with transaction analysis data');
 
         activeCharts.growth = new Chart(canvas, {
             type: 'bar',
             data: {
                 labels: data.growth_timeline.years,
-                datasets: [{
-                    label: 'Akkumuleret afkast (%)',
-                    data: data.growth_timeline.cumulative_growth,
-                    backgroundColor: [
-                        'rgba(212, 175, 55, 0.3)',
-                        'rgba(212, 175, 55, 0.4)',
-                        'rgba(212, 175, 55, 0.6)',
-                        'rgba(212, 175, 55, 0.8)',
-                        'rgba(212, 175, 55, 0.9)',
-                        'rgba(212, 175, 55, 1.0)'
-                    ],
-                    borderColor: '#d4af37',
-                    borderWidth: 2,
-                    borderRadius: 8
-                }]
+                datasets: [
+                    {
+                        label: 'Årlig cashflow (€)',
+                        data: data.growth_timeline.annual_cashflow,
+                        backgroundColor: 'rgba(22, 160, 133, 0.8)',
+                        borderColor: '#16a085',
+                        borderWidth: 2,
+                        borderRadius: 8
+                    },
+                    {
+                        label: 'Kapitalvækst (€)',
+                        data: [0, 0, data.transaction_analysis.capital_appreciation],
+                        backgroundColor: 'rgba(212, 175, 55, 0.8)',
+                        borderColor: '#d4af37',
+                        borderWidth: 2,
+                        borderRadius: 8
+                    }
+                ]
             },
             options: {
                 responsive: true,
@@ -443,14 +413,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 scales: {
                     x: { 
                         ticks: { color: '#ffffff' }, 
-                        grid: { color: 'rgba(255,255,255,0.1)' }
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        stacked: true
                     },
                     y: { 
                         ticks: { 
                             color: '#ffffff',
-                            callback: value => value + '%'
+                            callback: value => '€' + value.toLocaleString()
                         }, 
-                        grid: { color: 'rgba(255,255,255,0.1)' } 
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        stacked: true
                     }
                 },
                 animation: {
@@ -467,18 +439,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Dialog Functions for CTA Actions
     function showInvestmentDialog() {
         console.log('Opening investment reservation dialog...');
-        // Create a sophisticated dialog for investment
         const dialog = createStyledDialog(
             'Reservér Din Enhed',
             `
             <div style="text-align: center; padding: 20px;">
-                <div style="font-size: 48px; color: #d4af37; margin-bottom: 20px;">🏖️</div>
+                <div style="font-size: 48px; color: #d4af37; margin-bottom: 20px;">INVESTERING</div>
                 <h3 style="color: #d4af37; margin-bottom: 15px;">Tak for din interesse i Bellevue Residence!</h3>
                 <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px; line-height: 1.6;">
-                    Du er ved at træffe en klog investeringsbeslutning. Vores investeringsrådgiver vil kontakte dig inden for 24 timer for at hjælpe dig med at vælge den perfekte enhed.
+                    Du er ved at træffe en klog investeringsbeslutning med 11,7% årlig afkast og 66,3% total afkast over 3 år.
                 </p>
                 <div style="background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; padding: 20px; margin: 20px 0;">
-                    <p style="color: #d4af37; font-weight: bold; margin-bottom: 10px;">🎯 Næste skridt:</p>
+                    <p style="color: #d4af37; font-weight: bold; margin-bottom: 10px;">Næste skridt:</p>
                     <p style="color: rgba(255,255,255,0.8); font-size: 14px;">
                         • Enheds-visning og beliggenhedsvalg<br>
                         • Finansieringsstruktur og betalingsplan<br>
@@ -492,7 +463,6 @@ document.addEventListener('DOMContentLoaded', function() {
             `
         );
 
-        // Track investment intent (you could integrate with analytics here)
         console.log('Investment intent tracked for Bellevue Residence');
     }
 
@@ -502,15 +472,15 @@ document.addEventListener('DOMContentLoaded', function() {
             'Book Konsultation',
             `
             <div style="text-align: center; padding: 20px;">
-                <div style="font-size: 48px; color: #16a085; margin-bottom: 20px;">💼</div>
+                <div style="font-size: 48px; color: #16a085; margin-bottom: 20px;">KONSULTATION</div>
                 <h3 style="color: #16a085; margin-bottom: 15px;">Book Personlig Investeringskonsultation</h3>
                 <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px; line-height: 1.6;">
-                    Lad vores eksperter guide dig gennem investeringsmuligheden i Bellevue Residence. Vi tilbyder omfattende analyser og skræddersyet rådgivning.
+                    Lad vores eksperter guide dig gennem transaktionsanalysen for Bellevue Residence med detaljerede ROI-beregninger.
                 </p>
                 <div style="background: rgba(22, 160, 133, 0.1); border: 1px solid rgba(22, 160, 133, 0.3); border-radius: 12px; padding: 20px; margin: 20px 0;">
-                    <p style="color: #16a085; font-weight: bold; margin-bottom: 10px;">📋 Konsultationen inkluderer:</p>
+                    <p style="color: #16a085; font-weight: bold; margin-bottom: 10px;">Konsultationen inkluderer:</p>
                     <p style="color: rgba(255,255,255,0.8); font-size: 14px;">
-                        • Detaljeret markedsanalyse<br>
+                        • Detaljeret transaktionsanalyse gennemgang<br>
                         • ROI-beregninger og prognoser<br>
                         • Risikoevaluering og mitigering<br>
                         • Skræddersyet investeringsstrategi
@@ -642,5 +612,5 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(style);
 
-    console.log('Bellevue Residence app loaded and initialized with premium closing sales features');
+    console.log('Bellevue Residence app loaded with real Transaction Analysis data and professional design');
 });
