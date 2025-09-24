@@ -1,4 +1,4 @@
-// Enhanced Bellevue Residence App - Complete JavaScript with All Content
+// Enhanced Bellevue Residence App - Professional JavaScript without Floating Animations
 document.addEventListener('DOMContentLoaded', function() {
     // Transaction Analysis Data (from your document)
     const data = {
@@ -35,14 +35,14 @@ document.addEventListener('DOMContentLoaded', function() {
     init();
 
     function init() {
-        console.log('Initializing complete Bellevue Residence app with enhanced animations...');
+        console.log('Initializing professional Bellevue Residence app...');
         setupNavigation();
         setupAnimationObserver();
         setupEnhancedEffects();
         setupCountdown();
         showSection(0);
         
-        // Add subtle background animation
+        // Add subtle background animation (no floating particles)
         createBackgroundEffects();
     }
 
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (i === activeIndex) {
                 crumb.classList.add('active');
-                // Add subtle pulse animation
+                // Add subtle pulse animation - NO FLOATING
                 crumb.style.animation = 'pulse 0.6s ease-out';
                 setTimeout(() => {
                     crumb.style.animation = '';
@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function initializeSection(index) {
-        console.log('Initializing section', index, 'with enhanced animations');
+        console.log('Initializing section', index, 'with professional animations');
         
         // Reset all animated elements
         const animatedElements = document.querySelectorAll('.animated');
@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // ENHANCED ANIMATION FUNCTIONS
+    // PROFESSIONAL ANIMATION FUNCTIONS - NO FLOATING
 
     function animateHeroElements() {
         const metrics = document.querySelectorAll('#section-0 .metric-card');
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, index * 200 + 300);
         });
 
-        // Animate brand validations
+        // Animate brand validations - NO FLOATING
         const brands = document.querySelectorAll('#section-0 .brand-validation');
         brands.forEach((brand, index) => {
             brand.style.opacity = '0';
@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 400);
         }
 
-        // Animate demand grid
+        // Animate demand grid - NO FLOATING
         const demandItems = document.querySelectorAll('#section-1 .demand-item');
         demandItems.forEach((item, index) => {
             item.style.opacity = '0';
@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 catalyst.style.opacity = '1';
                 catalyst.style.transform = 'translateX(0)';
                 
-                // Add subtle bounce effect
+                // Add subtle bounce effect - NO CONTINUOUS FLOATING
                 setTimeout(() => {
                     catalyst.style.transform = 'translateX(5px)';
                     setTimeout(() => {
@@ -683,46 +683,38 @@ document.addEventListener('DOMContentLoaded', function() {
         requestAnimationFrame(updatePercentage);
     }
 
-    // ENHANCED BACKGROUND EFFECTS
+    // ENHANCED BACKGROUND EFFECTS - NO FLOATING PARTICLES
     function createBackgroundEffects() {
-        // Create subtle floating particles
-        const particleCount = 20;
+        // Create subtle static gradient overlay only
         const container = document.body;
         
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'bg-particle';
-            particle.style.cssText = `
+        // Add only static background gradient effects
+        const style = document.createElement('style');
+        style.textContent = `
+            body::after {
+                content: '';
                 position: fixed;
-                width: 2px;
-                height: 2px;
-                background: rgba(59, 130, 246, 0.3);
-                border-radius: 50%;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: 
+                    radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.02) 0%, transparent 50%),
+                    radial-gradient(circle at 75% 75%, rgba(212, 175, 55, 0.015) 0%, transparent 50%);
+                z-index: -2;
                 pointer-events: none;
-                z-index: -1;
-                left: ${Math.random() * 100}vw;
-                top: ${Math.random() * 100}vh;
-                animation: float ${5 + Math.random() * 10}s ease-in-out infinite;
-                animation-delay: ${Math.random() * 5}s;
-            `;
-            container.appendChild(particle);
-        }
+            }
+        `;
+        document.head.appendChild(style);
     }
 
     function setupEnhancedEffects() {
-        // Add CSS for enhanced animations
+        // Add CSS for enhanced animations - NO FLOATING
         const style = document.createElement('style');
         style.textContent = `
             @keyframes pulse {
                 0%, 100% { transform: scale(1); opacity: 1; }
                 50% { transform: scale(1.05); opacity: 0.8; }
-            }
-            
-            @keyframes float {
-                0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
-                25% { transform: translateY(-20px) translateX(10px); opacity: 0.6; }
-                50% { transform: translateY(-10px) translateX(-5px); opacity: 0.8; }
-                75% { transform: translateY(-30px) translateX(15px); opacity: 0.4; }
             }
             
             .section {
@@ -967,5 +959,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    console.log('Complete Bellevue Residence Enhanced JavaScript loaded successfully');
+    console.log('Professional Bellevue Residence JavaScript loaded successfully');
 });
