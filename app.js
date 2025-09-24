@@ -1,4 +1,4 @@
-// Bellevue Residence ejendomsapp - ADVANCED VISUAL VERSION with Teaser-inspired animations
+// Bellevue Residence ejendomsapp - Elegant Teaser-Style Version (based on final-refined)
 document.addEventListener('DOMContentLoaded', function() {
     // Updated transaction analysis data with corrected patterns
     const data = {
@@ -39,107 +39,54 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalSections = 6;
     let activeCharts = {};
 
-    // ADVANCED ANIMATION SYSTEM
-    let mouseX = 0;
-    let mouseY = 0;
-    
-    // Track mouse for magnetic effects
-    document.addEventListener('mousemove', function(e) {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    // Initialiser app med avancerede effekter
+    // Initialiser app
     setTimeout(() => {
         setupNavigation();
         showSection(0);
-        initializeAdvancedAnimations();
+        initializeAnimations();
         initializeProgressBar();
-        initializeMagneticEffects();
-        initializeParallaxEffects();
     }, 100);
 
     function setupNavigation() {
-        console.log('Opsætter Bellevue Residence navigation med avancerede effekter...');
+        console.log('Opsætter Bellevue Residence navigation...');
         
-        // Enhanced Breadcrumb navigation med hover tracking
+        // Breadcrumb navigation
         const breadcrumbs = document.querySelectorAll('.breadcrumb');
         breadcrumbs.forEach((breadcrumb, index) => {
             breadcrumb.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                
-                // Advanced section transition
-                showSectionWithTransition(index);
-            });
-
-            // Advanced hover effects
-            breadcrumb.addEventListener('mouseenter', function(e) {
-                this.style.setProperty('--x', (e.clientX - this.offsetLeft - this.offsetWidth/2) * 0.1 + 'px');
-                this.style.setProperty('--y', (e.clientY - this.offsetTop - this.offsetHeight/2) * 0.1 + 'px');
+                showSection(index);
             });
         });
 
-        // Enhanced Next button navigation
+        // Next button navigation
         const nextButtons = document.querySelectorAll('.next-btn, .cta-btn');
         nextButtons.forEach((button) => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                // Advanced button click animation
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 150);
-                
                 // Håndter forskellige button typer
                 if (button.classList.contains('cta-btn')) {
                     if (button.classList.contains('primary')) {
-                        showAdvancedContactDialog();
+                        showContactDialog();
                     } else {
-                        showAdvancedBrochureDialog();
+                        showBrochureDialog();
                     }
                 } else if (currentSection < totalSections - 1) {
-                    showSectionWithTransition(currentSection + 1);
+                    showSection(currentSection + 1);
                 }
-            });
-
-            // Magnetic hover effect for buttons
-            button.addEventListener('mousemove', function(e) {
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                
-                this.style.setProperty('--x', x * 0.15 + 'px');
-                this.style.setProperty('--y', y * 0.15 + 'px');
-            });
-
-            button.addEventListener('mouseleave', function() {
-                this.style.setProperty('--x', '0px');
-                this.style.setProperty('--y', '0px');
             });
         });
 
-        console.log('Avanceret navigation setup fuldført');
+        console.log('Navigation setup fuldført');
     }
 
     function showSection(index) {
-        showSectionWithTransition(index);
-    }
-
-    function showSectionWithTransition(index) {
-        console.log(`Viser Bellevue sektion ${index} med avancerede overgange`);
+        console.log(`Viser Bellevue sektion ${index}`);
         
         if (index < 0 || index >= totalSections) return;
-
-        // Advanced section transition
-        const currentActiveSection = document.querySelector('.section.active');
-        if (currentActiveSection) {
-            currentActiveSection.style.transform = 'translateX(-100px)';
-            currentActiveSection.style.opacity = '0';
-            currentActiveSection.style.filter = 'blur(5px)';
-        }
 
         // Ryd eksisterende charts
         Object.values(activeCharts).forEach(chart => {
@@ -149,168 +96,100 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         activeCharts = {};
 
-        setTimeout(() => {
-            // Skjul alle sektioner
-            const allSections = document.querySelectorAll('.section');
-            allSections.forEach(section => {
-                section.classList.remove('active');
-                section.style.display = 'none';
-                section.style.transform = '';
-                section.style.opacity = '';
-                section.style.filter = '';
-            });
+        // Skjul alle sektioner
+        const allSections = document.querySelectorAll('.section');
+        allSections.forEach(section => {
+            section.classList.remove('active');
+            section.style.display = 'none';
+        });
 
-            // Vis målsektion med advanced animation
-            const targetSection = document.getElementById(`section-${index}`);
-            if (targetSection) {
-                targetSection.style.display = 'block';
-                targetSection.style.transform = 'translateX(100px)';
-                targetSection.style.opacity = '0';
-                targetSection.style.filter = 'blur(5px)';
-                
-                setTimeout(() => {
-                    targetSection.classList.add('active');
-                    targetSection.style.transform = 'translateX(0)';
-                    targetSection.style.opacity = '1';
-                    targetSection.style.filter = 'blur(0px)';
-                }, 50);
+        // Vis målsektion
+        const targetSection = document.getElementById(`section-${index}`);
+        if (targetSection) {
+            targetSection.style.display = 'block';
+            targetSection.classList.add('active');
+        }
+
+        // Opdater breadcrumbs
+        const breadcrumbs = document.querySelectorAll('.breadcrumb');
+        breadcrumbs.forEach((crumb, i) => {
+            crumb.classList.remove('active', 'completed');
+            if (i === index) {
+                crumb.classList.add('active');
+            } else if (i < index) {
+                crumb.classList.add('completed');
             }
+        });
 
-            // Enhanced breadcrumb animation
-            const breadcrumbs = document.querySelectorAll('.breadcrumb');
-            breadcrumbs.forEach((crumb, i) => {
-                crumb.classList.remove('active', 'completed');
-                if (i === index) {
-                    crumb.classList.add('active');
-                    crumb.style.transform = 'scale(1.1)';
-                    setTimeout(() => {
-                        crumb.style.transform = '';
-                    }, 300);
-                } else if (i < index) {
-                    crumb.classList.add('completed');
-                }
-            });
+        currentSection = index;
 
-            currentSection = index;
-
-            // Initialiser sektion-specifikt indhold med delay
-            setTimeout(() => {
-                initializeAdvancedSection(index);
-            }, 400);
-
-        }, 200);
+        // Initialiser sektion-specifikt indhold
+        setTimeout(() => {
+            initializeSection(index);
+        }, 300);
 
         window.scrollTo(0, 0);
     }
 
-    function initializeAdvancedSection(index) {
-        console.log(`Initialiserer avanceret Bellevue sektion ${index}`);
+    function initializeSection(index) {
+        console.log(`Initialiserer Bellevue sektion ${index}`);
         
         switch (index) {
             case 0: // Hero sektion
                 setTimeout(() => {
-                    animateAdvancedMetricCards();
-                    animateAdvancedBrandTags();
-                    initializeMagneticCards();
+                    animateMetricCards();
+                    animateBrandTags();
                 }, 500);
                 break;
             case 1: // Lejeindtægt sektion
                 setTimeout(() => {
-                    animateAdvancedRentalProjection();
-                    createAdvancedRentalChart();
-                    initializeFloatingElements();
+                    animateRentalProjection();
+                    createAccumulatedRentalChart();
                 }, 500);
                 break;
             case 2: // Værditilvækst projektioner
                 setTimeout(() => {
-                    animateAdvancedGrowthPercentage();
-                    createAdvancedGrowthChart();
-                    initializeBreathingAnimation();
+                    animateGrowthPercentage();
+                    createCorrectedGrowthChart();
                 }, 500);
                 break;
             case 3: // Off-plan strategi
                 setTimeout(() => {
-                    animateAdvancedOffPlanBenefits();
-                    animateAdvancedProgressBar();
-                    initializeRippleEffects();
+                    animateOffPlanBenefits();
+                    animateProgressBar();
                 }, 500);
                 break;
             case 4: // Markedsposition
                 setTimeout(() => {
-                    animateAdvancedBrandShowcase();
-                    animateAdvancedDestinationShift();
-                    createAdvancedFDIChart();
-                    initializeShimmerEffects();
+                    animateBrandShowcase();
+                    animateDestinationShift();
+                    createEnhancedFDIChart();
                 }, 500);
                 break;
             case 5: // Ejendomsmulighed sammenfatning
                 setTimeout(() => {
-                    animateAdvancedSummaryCards();
-                    animateAdvancedStatusItems();
-                    initializePulsingEffects();
+                    animateSummaryCards();
+                    animateStatusItems();
                 }, 500);
                 break;
         }
     }
 
-    function initializeAdvancedAnimations() {
-        // Enhanced intersection observer med 3D effects
+    function initializeAnimations() {
+        // Tilføj intersection observer for scroll-udløste animationer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('animate-in');
-                    
-                    // Advanced sequential animation
-                    const siblings = Array.from(entry.target.parentNode.children);
-                    const index = siblings.indexOf(entry.target);
-                    entry.target.style.animationDelay = `${index * 100}ms`;
                 }
             });
-        }, { 
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
+        }, { threshold: 0.1 });
 
         // Observer alle animerbare elementer
         const animatableElements = document.querySelectorAll(
-            '.metric-card, .advantage-item, .driver-card, .positioning-item, .summary-card, .step-card, .demand-item, .catalyst-item, .brand-case'
+            '.metric-card, .advantage-item, .driver-card, .positioning-item, .summary-card, .step-card'
         );
         animatableElements.forEach(el => observer.observe(el));
-    }
-
-    function initializeMagneticEffects() {
-        // Magnetic effect for interactive elements
-        const magneticElements = document.querySelectorAll('.metric-card, .projection-highlight, .growth-value-box, .cta-btn, .next-btn');
-        
-        magneticElements.forEach(element => {
-            element.addEventListener('mousemove', function(e) {
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                
-                const moveX = x * 0.1;
-                const moveY = y * 0.1;
-                
-                this.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.02)`;
-            });
-
-            element.addEventListener('mouseleave', function() {
-                this.style.transform = '';
-            });
-        });
-    }
-
-    function initializeParallaxEffects() {
-        // Subtle parallax for background elements
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.hero-image, .rental-image, .growth-image, .position-image, .opportunity-image');
-            
-            parallaxElements.forEach(element => {
-                const speed = 0.1;
-                element.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
     }
 
     function initializeProgressBar() {
@@ -320,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // ADVANCED ANIMATION FUNCTIONS
+    // Enhanced Animation funktioner
     function animateNumber(element, target, duration = 2000, suffix = '', prefix = '', decimals = 0) {
         if (!element || element.classList.contains('animated')) return;
         element.classList.add('animated');
@@ -329,326 +208,144 @@ document.addEventListener('DOMContentLoaded', function() {
         const increment = target / (duration / 16);
         let current = start;
         
-        // Add sparkle effect during animation
-        element.style.textShadow = '0 0 20px rgba(212, 175, 55, 0.8)';
-        
         const timer = setInterval(() => {
             current += increment;
             if (current >= target) {
                 current = target;
                 clearInterval(timer);
-                // Reset text shadow
-                setTimeout(() => {
-                    element.style.textShadow = '0 0 10px rgba(212, 175, 55, 0.3)';
-                }, 500);
             }
             
             const displayValue = decimals > 0 ? current.toFixed(decimals) : Math.floor(current);
             element.textContent = prefix + displayValue + suffix;
-            
-            // Pulsing effect during counting
-            const scale = 1 + Math.sin(current / target * Math.PI) * 0.05;
-            element.style.transform = `scale(${scale})`;
         }, 16);
     }
 
-    function animateAdvancedMetricCards() {
+    function animateMetricCards() {
         const cards = document.querySelectorAll('.metric-card');
         cards.forEach((card, index) => {
-            // Staggered entrance animation
             setTimeout(() => {
-                card.style.transform = 'translateY(0) rotateX(0deg)';
+                card.style.transform = 'translateY(0)';
                 card.style.opacity = '1';
                 
-                // Add floating animation
-                card.style.animation = `floatingCard 3s ease-in-out infinite ${index * 0.5}s`;
-                
-                // Enhanced metric värde animation
+                // Animer metric værdierne med enhanced effects
                 const value = card.querySelector('.metric-value');
                 if (value && value.textContent.includes('%')) {
                     const target = parseFloat(value.textContent) || 0;
                     animateNumber(value, target, 3000, '%', '', 1);
                 }
-                
-                // Add subtle glow animation
-                setTimeout(() => {
-                    card.style.animation += ', morphingGlow 4s ease-in-out infinite';
-                }, 1000);
-                
-            }, index * 300);
+            }, index * 250);
         });
     }
 
-    function animateAdvancedBrandTags() {
+    function animateBrandTags() {
         const tags = document.querySelectorAll('.brand-validation');
         tags.forEach((tag, index) => {
             setTimeout(() => {
-                tag.style.transform = 'scale(1) rotateZ(0deg)';
+                tag.style.transform = 'scale(1)';
                 tag.style.opacity = '1';
-                
-                // Add shimmer effect
-                const shimmer = document.createElement('div');
-                shimmer.style.cssText = `
-                    position: absolute;
-                    top: 0;
-                    left: -100%;
-                    width: 100%;
-                    height: 100%;
-                    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-                    animation: shimmerEffect 2s ease-in-out infinite;
-                    pointer-events: none;
-                `;
-                tag.style.position = 'relative';
-                tag.appendChild(shimmer);
-                
-            }, 1500 + (index * 250));
+            }, 1200 + (index * 200));
         });
     }
 
-    function animateAdvancedRentalProjection() {
+    function animateRentalProjection() {
         const projectionElement = document.querySelector('.projection-range');
         if (projectionElement) {
-            // Enhanced number animation with glow effect
-            projectionElement.style.filter = 'brightness(1.2)';
-            animateNumber(projectionElement, data.transaction_analysis.annual_yield, 4000, '%', '', 1);
-            
-            setTimeout(() => {
-                projectionElement.style.filter = '';
-            }, 4000);
+            animateNumber(projectionElement, data.transaction_analysis.annual_yield, 3500, '%', '', 1);
         }
     }
 
-    function animateAdvancedGrowthPercentage() {
+    function animateGrowthPercentage() {
         const growthElement = document.querySelector('.growth-percentage');
         if (growthElement) {
-            // Advanced growth animation with multiple effects
-            growthElement.style.filter = 'brightness(1.3) saturate(1.5)';
-            animateNumber(growthElement, data.transaction_analysis.total_return_percentage, 4500, '%', '', 1);
-            
-            setTimeout(() => {
-                growthElement.style.filter = '';
-            }, 4500);
+            animateNumber(growthElement, data.transaction_analysis.total_return_percentage, 4000, '%', '', 1);
         }
     }
 
-    function animateAdvancedOffPlanBenefits() {
+    function animateOffPlanBenefits() {
         const stages = document.querySelectorAll('.timing-phase');
         stages.forEach((stage, index) => {
             setTimeout(() => {
-                stage.style.transform = 'translateX(0) rotateY(0deg)';
+                stage.style.transform = 'translateX(0)';
                 stage.style.opacity = '1';
-                
-                // Add breathing animation
-                setTimeout(() => {
-                    stage.style.animation = 'breathingCard 4s ease-in-out infinite';
-                }, 1000);
-                
-            }, index * 600);
+            }, index * 500);
         });
     }
 
-    function animateAdvancedProgressBar() {
+    function animateProgressBar() {
         const progressBar = document.querySelector('.progress-fill');
         if (progressBar) {
             setTimeout(() => {
                 progressBar.style.width = '50%';
-                progressBar.style.animation = 'pulseGlow 2s ease-in-out infinite';
-            }, 1500);
+            }, 1200);
         }
     }
 
-    function animateAdvancedBrandShowcase() {
+    function animateBrandShowcase() {
         const brandItems = document.querySelectorAll('.brand-case');
         brandItems.forEach((item, index) => {
             setTimeout(() => {
-                item.style.transform = 'translateY(0) rotateX(0deg)';
+                item.style.transform = 'translateY(0)';
                 item.style.opacity = '1';
-                
-                // Add hover anticipation effect
-                item.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-8px) rotateX(2deg) scale(1.02)';
-                    this.style.boxShadow = '0 15px 40px rgba(212, 175, 55, 0.2)';
-                });
-                
-                item.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) rotateX(0deg) scale(1)';
-                    this.style.boxShadow = '';
-                });
-                
-            }, index * 400);
+            }, index * 350);
         });
     }
 
-    function animateAdvancedDestinationShift() {
+    function animateDestinationShift() {
         const destinations = document.querySelectorAll('.old-market, .new-market');
         destinations.forEach((dest, index) => {
             setTimeout(() => {
-                dest.style.transform = 'scale(1) rotateY(0deg)';
+                dest.style.transform = 'scale(1)';
                 dest.style.opacity = '1';
-                
-                // Add subtle floating animation
-                dest.style.animation = `floatingCard 5s ease-in-out infinite ${index * 2}s`;
-                
-            }, index * 800);
+            }, index * 700);
         });
         
-        // Enhanced arrow animation
+        // Animer pil
         const arrow = document.querySelector('.market-transition .market-arrow');
         if (arrow) {
             setTimeout(() => {
                 arrow.style.transform = 'scale(1) rotate(0deg)';
                 arrow.style.opacity = '1';
-                arrow.style.animation = 'textSparkle 3s ease-in-out infinite';
-            }, 1200);
+            }, 1000);
         }
     }
 
-    function animateAdvancedSummaryCards() {
+    function animateSummaryCards() {
         const summaryCards = document.querySelectorAll('.summary-card');
         summaryCards.forEach((card, index) => {
             setTimeout(() => {
-                card.style.transform = 'translateY(0) rotateX(0deg)';
+                card.style.transform = 'translateY(0)';
                 card.style.opacity = '1';
                 
-                // Enhanced floating animation
-                card.style.animation = `floatingCard 4s ease-in-out infinite ${index * 1}s`;
-                
-                // Enhanced værdi animation
+                // Animer værdier i summary cards
                 const value = card.querySelector('.summary-value');
                 if (value) {
                     const text = value.textContent;
                     if (text.includes('%')) {
                         const target = parseFloat(text) || 0;
-                        animateNumber(value, target, 3000, '% over 3 år', '', 1);
+                        animateNumber(value, target, 2500, '% over 3 år', '', 1);
                     }
                 }
-                
-            }, index * 500);
+            }, index * 450);
         });
     }
 
-    function animateAdvancedStatusItems() {
+    function animateStatusItems() {
         const statusItems = document.querySelectorAll('.status-item');
         statusItems.forEach((item, index) => {
             setTimeout(() => {
-                item.style.transform = 'translateX(0) rotateY(0deg)';
+                item.style.transform = 'translateX(0)';
                 item.style.opacity = '1';
-                
-                // Add pulse effect for urgent items
-                const urgentIcon = item.querySelector('.status-icon.urgent');
-                if (urgentIcon) {
-                    urgentIcon.style.animation = 'borderRipple 1.5s ease-in-out infinite';
-                }
-                
-            }, index * 400);
+            }, index * 350);
         });
     }
 
-    // ADVANCED HELPER FUNCTIONS
-    function initializeMagneticCards() {
-        const cards = document.querySelectorAll('.metric-card');
-        cards.forEach(card => {
-            card.addEventListener('mousemove', function(e) {
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                
-                const rotateX = y * -0.1;
-                const rotateY = x * 0.1;
-                
-                this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
-            });
+    // ENHANCED CHART FUNCTIONS with glow effects and left-to-right animation
 
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = '';
-            });
-        });
-    }
-
-    function initializeFloatingElements() {
-        const floatingElements = document.querySelectorAll('.demand-item');
-        floatingElements.forEach((element, index) => {
-            element.style.animation = `floatingCard 4s ease-in-out infinite ${index * 0.8}s`;
-        });
-    }
-
-    function initializeBreathingAnimation() {
-        const breathingElements = document.querySelectorAll('.catalyst-item');
-        breathingElements.forEach((element, index) => {
-            setTimeout(() => {
-                element.style.animation = `breathingCard 5s ease-in-out infinite ${index * 0.5}s`;
-            }, 1000);
-        });
-    }
-
-    function initializeRippleEffects() {
-        const riskItems = document.querySelectorAll('.risk-item');
-        riskItems.forEach(item => {
-            item.addEventListener('click', function() {
-                // Create ripple effect
-                const ripple = document.createElement('div');
-                ripple.style.cssText = `
-                    position: absolute;
-                    border-radius: 50%;
-                    background: rgba(212, 175, 55, 0.3);
-                    transform: scale(0);
-                    animation: rippleAnimation 0.8s ease-out;
-                    pointer-events: none;
-                    width: 100px;
-                    height: 100px;
-                    left: 50%;
-                    top: 50%;
-                    margin-left: -50px;
-                    margin-top: -50px;
-                `;
-                
-                this.style.position = 'relative';
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 800);
-            });
-        });
-    }
-
-    function initializeShimmerEffects() {
-        const brandCases = document.querySelectorAll('.brand-case');
-        brandCases.forEach((brandCase, index) => {
-            setTimeout(() => {
-                const shimmer = document.createElement('div');
-                shimmer.style.cssText = `
-                    position: absolute;
-                    top: 0;
-                    left: -100%;
-                    width: 100%;
-                    height: 100%;
-                    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
-                    animation: shimmerEffect 3s ease-in-out infinite;
-                    pointer-events: none;
-                `;
-                brandCase.style.position = 'relative';
-                brandCase.appendChild(shimmer);
-            }, index * 1000);
-        });
-    }
-
-    function initializePulsingEffects() {
-        const summaryCards = document.querySelectorAll('.summary-card');
-        summaryCards.forEach((card, index) => {
-            setTimeout(() => {
-                card.style.animation += ', pulseGlow 3s ease-in-out infinite';
-            }, 2000 + index * 500);
-        });
-    }
-
-    // ADVANCED CHART FUNCTIONS with enhanced effects
-
-    function createAdvancedRentalChart() {
+    function createAccumulatedRentalChart() {
         const canvas = document.getElementById('rental-income-chart');
         if (!canvas) return;
 
-        console.log('Opretter avanceret akkumulerede årlige lejeindtægt chart');
+        console.log('Opretter akkumulerede årlige lejeindtægt chart');
 
         activeCharts.rental = new Chart(canvas, {
             type: 'line',
@@ -660,16 +357,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         data: data.rental_projections.accumulated_income,
                         borderColor: '#d4af37',
                         backgroundColor: 'rgba(212, 175, 55, 0.15)',
-                        borderWidth: 6,
+                        borderWidth: 5,
                         fill: true,
                         tension: 0.4,
                         pointBackgroundColor: '#d4af37',
                         pointBorderColor: '#ffffff',
                         pointBorderWidth: 4,
-                        pointRadius: 12,
-                        pointHoverRadius: 15,
-                        shadowColor: 'rgba(212, 175, 55, 0.8)',
-                        shadowBlur: 20,
+                        pointRadius: 10,
+                        pointHoverRadius: 12,
+                        shadowColor: 'rgba(212, 175, 55, 0.6)',
+                        shadowBlur: 15,
                         shadowOffsetX: 0,
                         shadowOffsetY: 0
                     }
@@ -723,17 +420,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 },
                 animation: {
-                    duration: 4000,
+                    duration: 3000,
                     easing: 'easeOutQuart',
                     onProgress: function(animation) {
+                        // Left-to-right reveal animation
                         const chart = animation.chart;
                         const ctx = chart.ctx;
+                        const meta = chart.getDatasetMeta(0);
                         const progress = animation.currentStep / animation.numSteps;
                         
-                        // Enhanced glow effect
+                        // Add glow effect
                         ctx.save();
-                        ctx.shadowColor = 'rgba(212, 175, 55, 0.9)';
-                        ctx.shadowBlur = 30 * progress;
+                        ctx.shadowColor = 'rgba(212, 175, 55, 0.8)';
+                        ctx.shadowBlur = 20 * progress;
                         ctx.restore();
                     }
                 },
@@ -745,19 +444,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     point: {
                         hoverBackgroundColor: '#ffd700',
                         hoverBorderColor: '#ffffff',
-                        hoverBorderWidth: 6,
-                        hoverRadius: 18
+                        hoverBorderWidth: 5,
+                        hoverRadius: 15
                     }
                 }
             }
         });
     }
 
-    function createAdvancedGrowthChart() {
+    function createCorrectedGrowthChart() {
         const canvas = document.getElementById('growth-timeline-chart');
         if (!canvas) return;
 
-        console.log('Opretter avanceret værditilvækst chart');
+        console.log('Opretter corrected værditilvækst chart (stops at Q1 2027)');
 
         activeCharts.growth = new Chart(canvas, {
             type: 'line',
@@ -769,29 +468,29 @@ document.addEventListener('DOMContentLoaded', function() {
                         data: data.growth_timeline.property_value,
                         borderColor: '#d4af37',
                         backgroundColor: 'rgba(212, 175, 55, 0.15)',
-                        borderWidth: 6,
+                        borderWidth: 5,
                         fill: true,
                         tension: 0.2,
                         pointBackgroundColor: '#d4af37',
                         pointBorderColor: '#ffffff',
                         pointBorderWidth: 4,
-                        pointRadius: 12,
-                        pointHoverRadius: 15,
-                        spanGaps: false
+                        pointRadius: 10,
+                        pointHoverRadius: 12,
+                        spanGaps: false // Don't connect null values
                     },
                     {
                         label: 'Akkumulerede lejeindtægter (€)',
                         data: data.growth_timeline.accumulated_rental,
                         borderColor: '#16a085',
                         backgroundColor: 'rgba(22, 160, 133, 0.15)',
-                        borderWidth: 5,
+                        borderWidth: 4,
                         fill: false,
                         tension: 0.4,
                         pointBackgroundColor: '#16a085',
                         pointBorderColor: '#ffffff',
                         pointBorderWidth: 3,
-                        pointRadius: 10,
-                        pointHoverRadius: 13
+                        pointRadius: 8,
+                        pointHoverRadius: 10
                     }
                 ]
             },
@@ -843,17 +542,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 },
                 animation: {
-                    duration: 4500,
+                    duration: 3500,
                     easing: 'easeOutQuart',
                     onProgress: function(animation) {
+                        // Enhanced glow effect for both lines
                         const chart = animation.chart;
                         const ctx = chart.ctx;
                         const progress = animation.currentStep / animation.numSteps;
                         
-                        // Dual glow effect
                         ctx.save();
-                        ctx.shadowColor = 'rgba(212, 175, 55, 0.7)';
-                        ctx.shadowBlur = 35 * progress;
+                        ctx.shadowColor = 'rgba(212, 175, 55, 0.6)';
+                        ctx.shadowBlur = 25 * progress;
                         ctx.restore();
                     }
                 },
@@ -865,19 +564,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     point: {
                         hoverBackgroundColor: '#ffd700',
                         hoverBorderColor: '#ffffff',
-                        hoverBorderWidth: 6,
-                        hoverRadius: 18
+                        hoverBorderWidth: 5,
+                        hoverRadius: 15
                     }
                 }
             }
         });
     }
 
-    function createAdvancedFDIChart() {
+    function createEnhancedFDIChart() {
         const canvas = document.getElementById('fdi-chart');
         if (!canvas) return;
 
-        console.log('Opretter avanceret FDI chart');
+        console.log('Opretter enhanced FDI chart');
 
         activeCharts.fdi = new Chart(canvas, {
             type: 'line',
@@ -889,14 +588,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         data: data.fdi_data.fdi_amounts,
                         borderColor: '#16a085',
                         backgroundColor: 'rgba(22, 160, 133, 0.15)',
-                        borderWidth: 6,
+                        borderWidth: 5,
                         fill: true,
                         tension: 0.4,
                         pointBackgroundColor: '#16a085',
                         pointBorderColor: '#ffffff',
                         pointBorderWidth: 4,
-                        pointRadius: 12,
-                        pointHoverRadius: 15
+                        pointRadius: 10,
+                        pointHoverRadius: 12
                     }
                 ]
             },
@@ -948,17 +647,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 },
                 animation: {
-                    duration: 4000,
+                    duration: 3000,
                     easing: 'easeOutQuart',
                     onProgress: function(animation) {
+                        // Green glow effect
                         const chart = animation.chart;
                         const ctx = chart.ctx;
                         const progress = animation.currentStep / animation.numSteps;
                         
-                        // Green glow effect
                         ctx.save();
-                        ctx.shadowColor = 'rgba(22, 160, 133, 0.8)';
-                        ctx.shadowBlur = 30 * progress;
+                        ctx.shadowColor = 'rgba(22, 160, 133, 0.6)';
+                        ctx.shadowBlur = 20 * progress;
                         ctx.restore();
                     }
                 },
@@ -970,27 +669,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     point: {
                         hoverBackgroundColor: '#20b2aa',
                         hoverBorderColor: '#ffffff',
-                        hoverBorderWidth: 6,
-                        hoverRadius: 18
+                        hoverBorderWidth: 5,
+                        hoverRadius: 15
                     }
                 }
             }
         });
     }
 
-    // ADVANCED DIALOG FUNCTIONS
-    function showAdvancedContactDialog() {
-        console.log('Åbner avanceret kontakt dialog...');
-        const dialog = createAdvancedStyledDialog(
+    // Updated dialog functions
+    function showContactDialog() {
+        console.log('Åbner kontakt dialog...');
+        const dialog = createStyledDialog(
             'Kontakt os',
             `
             <div style="text-align: center; padding: 25px;">
-                <div style="font-size: 48px; color: #d4af37; margin-bottom: 20px; animation: textSparkle 2s ease-in-out infinite;">📞</div>
+                <div style="font-size: 48px; color: #d4af37; margin-bottom: 20px;">📞</div>
                 <h3 style="color: #d4af37; margin-bottom: 18px; font-family: 'Playfair Display', serif;">Kontakt Bellevue Residence</h3>
                 <p style="color: rgba(255,255,255,0.9); margin-bottom: 25px; line-height: 1.7; font-size: 16px;">
                     Vil du vide mere om Bellevue Residence? Kontakt vores eksperter for personlig rådgivning om denne unikke investering.
                 </p>
-                <div style="background: rgba(212, 175, 55, 0.12); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 15px; padding: 25px; margin: 25px 0; animation: morphingGlow 3s ease-in-out infinite;">
+                <div style="background: rgba(212, 175, 55, 0.12); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 15px; padding: 25px; margin: 25px 0;">
                     <p style="color: #d4af37; font-weight: bold; margin-bottom: 12px; font-size: 16px;">Vi kan hjælpe med:</p>
                     <p style="color: rgba(255,255,255,0.85); font-size: 15px; line-height: 1.6;">
                         • Ejendomsvisning og enhedsvalg<br>
@@ -999,26 +698,28 @@ document.addEventListener('DOMContentLoaded', function() {
                         • Juridisk rådgivning og kontrakter
                     </p>
                 </div>
-                <button onclick="closeDialog()" style="background: linear-gradient(135deg, #d4af37 0%, #ffd700 50%, #b8860b 100%); color: #000; border: none; padding: 14px 35px; border-radius: 30px; font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 14px; box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4); font-family: 'Playfair Display', serif; letter-spacing: 1px; transition: all 0.3s ease;">
+                <button onclick="closeDialog()" style="background: linear-gradient(135deg, #d4af37 0%, #ffd700 50%, #b8860b 100%); color: #000; border: none; padding: 14px 35px; border-radius: 30px; font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 14px; box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4); font-family: 'Playfair Display', serif; letter-spacing: 1px;">
                     Luk
                 </button>
             </div>
             `
         );
+        
+        console.log('Kontakt interesse registreret for Bellevue Residence');
     }
 
-    function showAdvancedBrochureDialog() {
-        console.log('Åbner avanceret brochure dialog...');
-        const dialog = createAdvancedStyledDialog(
+    function showBrochureDialog() {
+        console.log('Åbner brochure dialog...');
+        const dialog = createStyledDialog(
             'Download brochure',
             `
             <div style="text-align: center; padding: 25px;">
-                <div style="font-size: 48px; color: #16a085; margin-bottom: 20px; animation: textSparkle 2s ease-in-out infinite;">📋</div>
+                <div style="font-size: 48px; color: #16a085; margin-bottom: 20px;">📋</div>
                 <h3 style="color: #16a085; margin-bottom: 18px; font-family: 'Playfair Display', serif;">Få den komplette brochure</h3>
                 <p style="color: rgba(255,255,255,0.9); margin-bottom: 25px; line-height: 1.7; font-size: 16px;">
                     Download den detaljerede brochure med alle informationer om Bellevue Residence og investeringsmuligheden.
                 </p>
-                <div style="background: rgba(22, 160, 133, 0.12); border: 1px solid rgba(22, 160, 133, 0.35); border-radius: 15px; padding: 25px; margin: 25px 0; animation: morphingGlow 3s ease-in-out infinite;">
+                <div style="background: rgba(22, 160, 133, 0.12); border: 1px solid rgba(22, 160, 133, 0.35); border-radius: 15px; padding: 25px; margin: 25px 0;">
                     <p style="color: #16a085; font-weight: bold; margin-bottom: 12px; font-size: 16px;">Brochuren indeholder:</p>
                     <p style="color: rgba(255,255,255,0.85); font-size: 15px; line-height: 1.6;">
                         • Komplet transaktionsanalyse (€143.000)<br>
@@ -1028,7 +729,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         • Juridiske vilkår og betalingsplan
                     </p>
                 </div>
-                <button onclick="closeDialog()" style="background: linear-gradient(135deg, #16a085 0%, #20b2aa 100%); color: #fff; border: none; padding: 14px 35px; border-radius: 30px; font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 14px; box-shadow: 0 6px 20px rgba(22, 160, 133, 0.4); font-family: 'Playfair Display', serif; letter-spacing: 1px; transition: all 0.3s ease;">
+                <button onclick="closeDialog()" style="background: linear-gradient(135deg, #16a085 0%, #20b2aa 100%); color: #fff; border: none; padding: 14px 35px; border-radius: 30px; font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 14px; box-shadow: 0 6px 20px rgba(22, 160, 133, 0.4); font-family: 'Playfair Display', serif; letter-spacing: 1px;">
                     Luk
                 </button>
             </div>
@@ -1036,7 +737,7 @@ document.addEventListener('DOMContentLoaded', function() {
         );
     }
 
-    function createAdvancedStyledDialog(title, content) {
+    function createStyledDialog(title, content) {
         const dialog = document.createElement('div');
         dialog.style.cssText = `
             position: fixed;
@@ -1044,13 +745,12 @@ document.addEventListener('DOMContentLoaded', function() {
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.85);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 10000;
-            backdrop-filter: blur(20px);
-            animation: dialogFadeIn 0.3s ease-out;
+            backdrop-filter: blur(15px);
         `;
         
         dialog.innerHTML = `
@@ -1064,7 +764,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
                 position: relative;
                 backdrop-filter: blur(20px);
-                animation: dialogSlideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             ">
                 <div style="
                     background: linear-gradient(135deg, #d4af37 0%, #ffd700 30%, #b8860b 100%);
@@ -1076,82 +775,40 @@ document.addEventListener('DOMContentLoaded', function() {
                     text-transform: uppercase;
                     letter-spacing: 1.5px;
                     font-family: 'Playfair Display', serif;
-                    position: relative;
-                    overflow: hidden;
                 ">
-                    <div style="
-                        position: absolute;
-                        top: 0;
-                        left: -100%;
-                        width: 100%;
-                        height: 100%;
-                        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-                        animation: shimmerEffect 2s ease-in-out infinite;
-                    "></div>
                     ${title}
                 </div>
                 ${content}
             </div>
         `;
         
-        // Enhanced close functionality
+        // Luk på baggrund klik
         dialog.addEventListener('click', function(e) {
             if (e.target === dialog) {
-                closeAdvancedDialog();
+                closeDialog();
             }
         });
         
         document.body.appendChild(dialog);
         
-        // Enhanced close function
+        // Gør closeDialog globalt tilgængelig
         window.closeDialog = function() {
-            closeAdvancedDialog();
+            document.body.removeChild(dialog);
         };
-        
-        function closeAdvancedDialog() {
-            dialog.style.animation = 'dialogFadeOut 0.3s ease-in';
-            setTimeout(() => {
-                document.body.removeChild(dialog);
-            }, 300);
-        }
         
         return dialog;
     }
 
-    // Keyboard navigation med enhanced effects
+    // Keyboard navigation
     document.addEventListener('keydown', function(e) {
         if (e.key === 'ArrowRight' && currentSection < totalSections - 1) {
             e.preventDefault();
-            showSectionWithTransition(currentSection + 1);
+            showSection(currentSection + 1);
         } else if (e.key === 'ArrowLeft' && currentSection > 0) {
             e.preventDefault();
-            showSectionWithTransition(currentSection - 1);
+            showSection(currentSection - 1);
         }
     });
 
-    // Add CSS keyframes for advanced animations
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes dialogFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes dialogFadeOut {
-            from { opacity: 1; }
-            to { opacity: 0; }
-        }
-        
-        @keyframes dialogSlideIn {
-            from { transform: translateY(-50px) scale(0.9); opacity: 0; }
-            to { transform: translateY(0) scale(1); opacity: 1; }
-        }
-        
-        @keyframes rippleAnimation {
-            to { transform: scale(4); opacity: 0; }
-        }
-    `;
-    document.head.appendChild(style);
-
-    console.log('Avanceret Bellevue Residence app indlæst med Teaser-inspirerede animationer');
+    console.log('Bellevue Residence app indlæst med elegant Teaser-style animations');
 });
