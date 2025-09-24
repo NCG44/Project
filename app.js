@@ -1,4 +1,4 @@
-// Bellevue Residence Investment App - Professional Closing Sales Interface with Transaction Analysis Data
+// Bellevue Residence Investment App - Professional Interface with Transaction Analysis Data
 document.addEventListener('DOMContentLoaded', function() {
     // Real Transaction Analysis data from Norden Capital Group
     const data = {
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function setupNavigation() {
         console.log('Setting up Bellevue Residence navigation...');
-
+        
         // Breadcrumb navigation
         const breadcrumbs = document.querySelectorAll('.breadcrumb');
         breadcrumbs.forEach((breadcrumb, index) => {
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-
+                
                 // Handle CTA buttons differently
                 if (button.classList.contains('cta-btn')) {
                     if (button.classList.contains('primary')) {
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showSection(index) {
         console.log(`Showing Bellevue section ${index}`);
-
+        
         if (index < 0 || index >= totalSections) return;
 
         // Clear existing charts
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function initializeSection(index) {
         console.log(`Initializing Bellevue section ${index}`);
-
+        
         switch (index) {
             case 0: // Hero section
                 setTimeout(() => {
@@ -188,18 +188,18 @@ document.addEventListener('DOMContentLoaded', function() {
     function animateNumber(element, target, duration = 2000, suffix = '', prefix = '', decimals = 0) {
         if (!element || element.classList.contains('animated')) return;
         element.classList.add('animated');
-
+        
         let start = 0;
         const increment = target / (duration / 16);
         let current = start;
-
+        
         const timer = setInterval(() => {
             current += increment;
             if (current >= target) {
                 current = target;
                 clearInterval(timer);
             }
-
+            
             const displayValue = decimals > 0 ? current.toFixed(decimals) : Math.floor(current);
             element.textContent = prefix + displayValue + suffix;
         }, 16);
@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 card.style.transform = 'translateY(0)';
                 card.style.opacity = '1';
-
+                
                 // Animate the metric values
                 const value = card.querySelector('.metric-value');
                 if (value && value.textContent.includes('%')) {
@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function animateBrandTags() {
-        const tags = document.querySelectorAll('.brand-tag');
+        const tags = document.querySelectorAll('.brand-validation');
         tags.forEach((tag, index) => {
             setTimeout(() => {
                 tag.style.transform = 'scale(1)';
@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function animateOffPlanBenefits() {
-        const stages = document.querySelectorAll('.advantage-stage');
+        const stages = document.querySelectorAll('.timing-phase');
         stages.forEach((stage, index) => {
             setTimeout(() => {
                 stage.style.transform = 'translateX(0)';
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function animateBrandShowcase() {
-        const brandItems = document.querySelectorAll('.brand-item');
+        const brandItems = document.querySelectorAll('.brand-case');
         brandItems.forEach((item, index) => {
             setTimeout(() => {
                 item.style.transform = 'translateY(0)';
@@ -267,16 +267,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function animateDestinationShift() {
-        const destinations = document.querySelectorAll('.old-destination, .new-destination');
+        const destinations = document.querySelectorAll('.old-market, .new-market');
         destinations.forEach((dest, index) => {
             setTimeout(() => {
                 dest.style.transform = 'scale(1)';
                 dest.style.opacity = '1';
             }, index * 600);
         });
-
+        
         // Animate arrow
-        const arrow = document.querySelector('.destination-shift .arrow');
+        const arrow = document.querySelector('.market-transition .market-arrow');
         if (arrow) {
             setTimeout(() => {
                 arrow.style.transform = 'scale(1) rotate(0deg)';
@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 card.style.transform = 'translateY(0)';
                 card.style.opacity = '1';
-
+                
                 // Animate values in summary cards
                 const value = card.querySelector('.summary-value');
                 if (value) {
@@ -462,26 +462,26 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             `
         );
-
+        
         console.log('Investment intent tracked for Bellevue Residence');
     }
 
     function showConsultationDialog() {
         console.log('Opening consultation booking dialog...');
         const dialog = createStyledDialog(
-            'Book Konsultation',
+            'Book Transaktionsanalyse',
             `
             <div style="text-align: center; padding: 20px;">
                 <div style="font-size: 48px; color: #16a085; margin-bottom: 20px;">KONSULTATION</div>
-                <h3 style="color: #16a085; margin-bottom: 15px;">Book Personlig Investeringskonsultation</h3>
+                <h3 style="color: #16a085; margin-bottom: 15px;">Book Personlig Transaktionsanalyse</h3>
                 <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px; line-height: 1.6;">
-                    Lad vores eksperter guide dig gennem transaktionsanalysen for Bellevue Residence med detaljerede ROI-beregninger.
+                    Lad vores eksperter guide dig gennem den detaljerede transaktionsanalyse for Bellevue Residence med verificerede ROI-beregninger.
                 </p>
                 <div style="background: rgba(22, 160, 133, 0.1); border: 1px solid rgba(22, 160, 133, 0.3); border-radius: 12px; padding: 20px; margin: 20px 0;">
-                    <p style="color: #16a085; font-weight: bold; margin-bottom: 10px;">Konsultationen inkluderer:</p>
+                    <p style="color: #16a085; font-weight: bold; margin-bottom: 10px;">Transaktionsanalysen inkluderer:</p>
                     <p style="color: rgba(255,255,255,0.8); font-size: 14px;">
-                        • Detaljeret transaktionsanalyse gennemgang<br>
-                        • ROI-beregninger og prognoser<br>
+                        • Detaljeret gennemgang af 11,7% årlig afkast<br>
+                        • 66,3% total afkast beregning over 3 år<br>
                         • Risikoevaluering og mitigering<br>
                         • Skræddersyet investeringsstrategi
                     </p>
@@ -509,7 +509,7 @@ document.addEventListener('DOMContentLoaded', function() {
             z-index: 10000;
             backdrop-filter: blur(10px);
         `;
-
+        
         dialog.innerHTML = `
             <div style="
                 background: linear-gradient(135deg, #1a2332 0%, #0f1419 100%);
@@ -536,21 +536,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 ${content}
             </div>
         `;
-
+        
         // Close on background click
         dialog.addEventListener('click', function(e) {
             if (e.target === dialog) {
                 closeDialog();
             }
         });
-
+        
         document.body.appendChild(dialog);
-
+        
         // Make closeDialog globally accessible
         window.closeDialog = function() {
             document.body.removeChild(dialog);
         };
-
+        
         return dialog;
     }
 
@@ -573,40 +573,46 @@ document.addEventListener('DOMContentLoaded', function() {
             transform: translateY(30px);
             transition: all 0.6s ease;
         }
-
+        
         .metric-card.animate-in, .advantage-item.animate-in, .driver-card.animate-in, 
         .positioning-item.animate-in, .summary-card.animate-in, .step-card.animate-in {
             opacity: 1;
             transform: translateY(0);
         }
-
-        .advantage-stage {
+        
+        .timing-phase {
             opacity: 0;
             transform: translateX(-50px);
             transition: all 0.6s ease;
         }
-
-        .brand-item {
+        
+        .brand-case {
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.6s ease;
         }
-
-        .old-destination, .new-destination {
+        
+        .old-market, .new-market {
             opacity: 0;
             transform: scale(0.8);
             transition: all 0.6s ease;
         }
-
-        .destination-shift .arrow {
+        
+        .market-arrow {
             opacity: 0;
             transform: scale(0.5) rotate(45deg);
             transition: all 0.6s ease;
         }
-
+        
         .status-item {
             opacity: 0;
             transform: translateX(-30px);
+            transition: all 0.4s ease;
+        }
+        
+        .brand-validation {
+            opacity: 0;
+            transform: scale(0.8);
             transition: all 0.4s ease;
         }
     `;
