@@ -1,15 +1,33 @@
-// Bellevue Residence App - JavaScript with Controlled Animations
+// Bellevue Residence ejendomsapp - Matching Gold Boxes Version with 11.7% correction
 document.addEventListener('DOMContentLoaded', function() {
-    // Updated data for Bellevue Residence
+    // Updated transaction analysis data with corrected 11.7% rental yield
     const data = {
+        transaction_analysis: {
+            purchase_amount: 143000,
+            nightly_rate: 150,
+            occupied_nights: 146,
+            gross_rental_income: 21900,
+            operating_costs: 5040,
+            net_rental_income: 16860,
+            annual_yield: 11.7, // CORRECTED: Changed from 11.0% to 11.7%
+            projected_exit_price: 187333,
+            capital_appreciation: 44333,
+            three_year_cashflow: 50580,
+            total_return: 94913,
+            total_return_percentage: 66.3,
+            occupancy_rate: 40,
+            completion_year: 2027
+        },
+        // Updated rental projections with ACCUMULATED YEARLY data 2027-2029
         rental_projections: {
             years: ['2027', '2028', '2029'],
-            accumulated_income: [16860, 33720, 50580]
+            accumulated_income: [16860, 33720, 50580] // Accumulated yearly rental income
         },
+        // Corrected growth timeline - Property value stops at Q1 2027, rental continues to År 3
         growth_timeline: {
             periods: ['Køb (2025)', 'Off-plan (2026)', 'Færdiggørelse Q1 2027', 'År 2 (2028)', 'År 3 (2029)'],
-            property_value: [143000, 143000, 187333, null, null],
-            accumulated_rental: [0, 0, 16860, 33720, 50580]
+            property_value: [143000, 143000, 187333, null, null], // Stops at Q1 2027 (completion)
+            accumulated_rental: [0, 0, 16860, 33720, 50580] // Continues to År 3
         },
         fdi_data: {
             years: ['2019', '2020', '2021', '2022', '2023', '2024'],
@@ -21,51 +39,56 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalSections = 6;
     let activeCharts = {};
 
-    // Wait for DOM to be fully ready
+    // Initialiser app
     setTimeout(() => {
         setupNavigation();
         showSection(0);
+        initializeAnimations();
+        initializeProgressBar();
     }, 100);
 
     function setupNavigation() {
-        console.log('Setting up navigation...');
+        console.log('Opsætter Bellevue Residence navigation...');
         
-        // Breadcrumb clicks
+        // Breadcrumb navigation
         const breadcrumbs = document.querySelectorAll('.breadcrumb');
         breadcrumbs.forEach((breadcrumb, index) => {
             breadcrumb.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('Breadcrumb', index, 'clicked');
                 showSection(index);
             });
         });
 
-        // Next button clicks
-        const nextButtons = document.querySelectorAll('.next-btn');
+        // Next button navigation
+        const nextButtons = document.querySelectorAll('.next-btn, .cta-btn');
         nextButtons.forEach((button) => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('Next button clicked, current section:', currentSection);
-                if (currentSection < totalSections - 1) {
+                
+                // Håndter forskellige button typer
+                if (button.classList.contains('cta-btn')) {
+                    if (button.classList.contains('primary')) {
+                        showContactDialog();
+                    } else {
+                        showBrochureDialog();
+                    }
+                } else if (currentSection < totalSections - 1) {
                     showSection(currentSection + 1);
                 }
             });
         });
 
-        console.log('Navigation setup complete');
+        console.log('Navigation setup fuldført');
     }
 
     function showSection(index) {
-        console.log('Showing section', index);
+        console.log(`Viser Bellevue sektion ${index}`);
         
-        if (index < 0 || index >= totalSections) {
-            console.log('Invalid section index:', index);
-            return;
-        }
+        if (index < 0 || index >= totalSections) return;
 
-        // Clear existing charts
+        // Ryd eksisterende charts
         Object.values(activeCharts).forEach(chart => {
             if (chart && typeof chart.destroy === 'function') {
                 chart.destroy();
@@ -73,25 +96,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         activeCharts = {};
 
-        // Hide all sections with explicit style changes
+        // Skjul alle sektioner
         const allSections = document.querySelectorAll('.section');
-        allSections.forEach((section, i) => {
+        allSections.forEach(section => {
             section.classList.remove('active');
             section.style.display = 'none';
         });
 
-        // Show target section with explicit style changes
+        // Vis målsektion
         const targetSection = document.getElementById(`section-${index}`);
         if (targetSection) {
             targetSection.style.display = 'block';
             targetSection.classList.add('active');
-            console.log('Showing section-' + index);
-        } else {
-            console.log('Section section-' + index + ' not found!');
-            return;
         }
 
-        // Update breadcrumbs
+        // Opdater breadcrumbs
         const breadcrumbs = document.querySelectorAll('.breadcrumb');
         breadcrumbs.forEach((crumb, i) => {
             crumb.classList.remove('active', 'completed');
@@ -104,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         currentSection = index;
 
-        // Initialize section content with delay for DOM updates
+        // Initialiser sektion-specifikt indhold
         setTimeout(() => {
             initializeSection(index);
         }, 300);
@@ -113,36 +132,74 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function initializeSection(index) {
-        console.log('Initializing section', index);
+        console.log(`Initialiserer Bellevue sektion ${index}`);
         
-        // Reset all animated elements
-        const animatedElements = document.querySelectorAll('.animated');
-        animatedElements.forEach(el => el.classList.remove('animated'));
-
         switch (index) {
-            case 1: // Rental section
+            case 0: // Hero sektion
                 setTimeout(() => {
-                    animateReturnValues();
-                    createRentalChart();
+                    animateMetricCards();
+                    animateBrandTags();
                 }, 500);
                 break;
-            case 2: // Growth section  
+            case 1: // Lejeindtægt sektion
                 setTimeout(() => {
-                    animateCounter();
-                    createGrowthChart();
-                    animateMilestones();
+                    animateRentalProjection(); // Will show 11.7%
+                    createAccumulatedRentalChart();
                 }, 500);
                 break;
-            case 4: // Market position section
+            case 2: // Værditilvækst projektioner
                 setTimeout(() => {
-                    createFDIChart();
-                    animateHighlightNumbers();
+                    animateGrowthPercentage();
+                    createCorrectedGrowthChart();
+                }, 500);
+                break;
+            case 3: // Off-plan strategi
+                setTimeout(() => {
+                    animateOffPlanBenefits();
+                    animateProgressBar();
+                }, 500);
+                break;
+            case 4: // Markedsposition
+                setTimeout(() => {
+                    animateBrandShowcase();
+                    animateDestinationShift();
+                    createEnhancedFDIChart();
+                }, 500);
+                break;
+            case 5: // Ejendomsmulighed sammenfatning
+                setTimeout(() => {
+                    animateSummaryCards();
+                    animateStatusItems();
                 }, 500);
                 break;
         }
     }
 
-    // Enhanced Counter Animation Function (CONTROLLED)
+    function initializeAnimations() {
+        // Tilføj intersection observer for scroll-udløste animationer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observer alle animerbare elementer
+        const animatableElements = document.querySelectorAll(
+            '.metric-card, .advantage-item, .driver-card, .positioning-item, .summary-card, .step-card'
+        );
+        animatableElements.forEach(el => observer.observe(el));
+    }
+
+    function initializeProgressBar() {
+        const progressBar = document.querySelector('.progress-fill');
+        if (progressBar) {
+            progressBar.style.width = '0%';
+        }
+    }
+
+    // Enhanced Animation funktioner
     function animateNumber(element, target, duration = 2000, suffix = '', prefix = '', decimals = 0) {
         if (!element || element.classList.contains('animated')) return;
         element.classList.add('animated');
@@ -163,168 +220,157 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 16);
     }
 
-    // Animate Return Values in Rental Section
-    function animateReturnValues() {
-        const returnElements = document.querySelectorAll('.value-number');
-        console.log('Found', returnElements.length, 'value number elements');
-        returnElements.forEach((element, index) => {
-            const target = parseFloat(element.getAttribute('data-target')) || parseFloat(element.textContent);
-            console.log('Animating value number', index, 'target:', target);
+    function animateMetricCards() {
+        const cards = document.querySelectorAll('.metric-card');
+        cards.forEach((card, index) => {
             setTimeout(() => {
-                animateNumber(element, target, 2500, '', '', 1);
-            }, index * 300);
+                card.style.transform = 'translateY(0)';
+                card.style.opacity = '1';
+                
+                // Animer metric værdierne med enhanced effects
+                const value = card.querySelector('.metric-value');
+                if (value && value.textContent.includes('%')) {
+                    const target = parseFloat(value.textContent) || 0;
+                    animateNumber(value, target, 3000, '%', '', 1);
+                }
+            }, index * 250);
         });
     }
 
-    // Animate Counter for Main Value
-    function animateCounter() {
-        const counter = document.querySelector('#section-2 .value-number');
-        if (counter && !counter.classList.contains('animated')) {
-            const target = parseFloat(counter.getAttribute('data-target')) || 66.3;
-            console.log('Animating counter target:', target);
-            animateNumber(counter, target, 3000, '', '', 1);
+    function animateBrandTags() {
+        const tags = document.querySelectorAll('.brand-validation');
+        tags.forEach((tag, index) => {
+            setTimeout(() => {
+                tag.style.transform = 'scale(1)';
+                tag.style.opacity = '1';
+            }, 1200 + (index * 200));
+        });
+    }
+
+    function animateRentalProjection() {
+        // CORRECTED: Now animates to 11.7% instead of 11%
+        const projectionElement = document.querySelector('.projection-range');
+        if (projectionElement) {
+            console.log('Animating rental projection to 11.7%');
+            animateNumber(projectionElement, data.transaction_analysis.annual_yield, 3500, '%', '', 1);
         }
     }
 
-    // Animate Highlight Numbers in Market Section
-    function animateHighlightNumbers() {
-        const highlightElements = document.querySelectorAll('#section-4 .highlight-number');
-        console.log('Found', highlightElements.length, 'highlight number elements');
-        highlightElements.forEach((element, index) => {
-            const target = parseInt(element.getAttribute('data-target'));
+    function animateGrowthPercentage() {
+        const growthElement = document.querySelector('.growth-percentage');
+        if (growthElement) {
+            animateNumber(growthElement, data.transaction_analysis.total_return_percentage, 4000, '%', '', 1);
+        }
+    }
+
+    function animateOffPlanBenefits() {
+        const stages = document.querySelectorAll('.timing-phase');
+        stages.forEach((stage, index) => {
             setTimeout(() => {
-                animateNumber(element, target, 2000);
+                stage.style.transform = 'translateX(0)';
+                stage.style.opacity = '1';
             }, index * 500);
         });
     }
 
-    // CONTROLLED Milestone Animation (reduced intensity)
-    function animateMilestones() {
-        const milestoneCards = document.querySelectorAll('#section-2 .milestone-card');
-        console.log('Found', milestoneCards.length, 'milestone cards');
-        milestoneCards.forEach((card, index) => {
-            const delay = parseInt(card.getAttribute('data-delay')) || (index * 200);
-            
-            // Reset animation
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            
+    function animateProgressBar() {
+        const progressBar = document.querySelector('.progress-fill');
+        if (progressBar) {
             setTimeout(() => {
-                card.style.transition = 'all 0.6s ease-out';
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0px)';
-            }, delay);
+                progressBar.style.width = '50%';
+            }, 1200);
+        }
+    }
+
+    function animateBrandShowcase() {
+        const brandItems = document.querySelectorAll('.brand-case');
+        brandItems.forEach((item, index) => {
+            setTimeout(() => {
+                item.style.transform = 'translateY(0)';
+                item.style.opacity = '1';
+            }, index * 350);
         });
     }
 
-    // CONTROLLED Chart Creation (reduced animation)
-    function createRentalChart() {
+    function animateDestinationShift() {
+        const destinations = document.querySelectorAll('.old-market, .new-market');
+        destinations.forEach((dest, index) => {
+            setTimeout(() => {
+                dest.style.transform = 'scale(1)';
+                dest.style.opacity = '1';
+            }, index * 700);
+        });
+        
+        // Animer pil
+        const arrow = document.querySelector('.market-transition .market-arrow');
+        if (arrow) {
+            setTimeout(() => {
+                arrow.style.transform = 'scale(1) rotate(0deg)';
+                arrow.style.opacity = '1';
+            }, 1000);
+        }
+    }
+
+    function animateSummaryCards() {
+        const summaryCards = document.querySelectorAll('.summary-card');
+        summaryCards.forEach((card, index) => {
+            setTimeout(() => {
+                card.style.transform = 'translateY(0)';
+                card.style.opacity = '1';
+                
+                // Animer værdier i summary cards
+                const value = card.querySelector('.summary-value');
+                if (value) {
+                    const text = value.textContent;
+                    if (text.includes('%')) {
+                        const target = parseFloat(text) || 0;
+                        animateNumber(value, target, 2500, '% over 3 år', '', 1);
+                    }
+                }
+            }, index * 450);
+        });
+    }
+
+    function animateStatusItems() {
+        const statusItems = document.querySelectorAll('.status-item');
+        statusItems.forEach((item, index) => {
+            setTimeout(() => {
+                item.style.transform = 'translateX(0)';
+                item.style.opacity = '1';
+            }, index * 350);
+        });
+    }
+
+    // ENHANCED CHART FUNCTIONS with glow effects and left-to-right animation
+
+    function createAccumulatedRentalChart() {
         const canvas = document.getElementById('rental-income-chart');
-        if (!canvas) {
-            console.log('Rental chart canvas not found');
-            return;
-        }
+        if (!canvas) return;
 
-        console.log('Creating rental chart');
-
-        // Clear any existing chart
-        if (activeCharts.rental) {
-            activeCharts.rental.destroy();
-        }
+        console.log('Opretter akkumulerede årlige lejeindtægt chart');
 
         activeCharts.rental = new Chart(canvas, {
             type: 'line',
             data: {
                 labels: data.rental_projections.years,
-                datasets: [{
-                    label: 'Akkumulerede årlige lejeindtægter (€)',
-                    data: data.rental_projections.accumulated_income,
-                    borderColor: '#00ff66',
-                    backgroundColor: 'rgba(0, 255, 102, 0.1)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4,
-                    pointBackgroundColor: '#00ff66',
-                    pointBorderColor: '#ffffff',
-                    pointBorderWidth: 2,
-                    pointRadius: 6
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { 
-                    legend: { 
-                        display: true,
-                        labels: { color: '#ffffff' }
-                    }
-                },
-                scales: {
-                    x: { 
-                        ticks: { color: '#ffffff' }, 
-                        grid: { color: 'rgba(255,255,255,0.1)' }
-                    },
-                    y: { 
-                        ticks: { 
-                            color: '#ffffff',
-                            callback: value => '€' + value.toLocaleString()
-                        }, 
-                        grid: { color: 'rgba(255,255,255,0.1)' }
-                    }
-                },
-                animation: {
-                    duration: 2000, // Reduced from 3500
-                    easing: 'easeOutQuart'
-                },
-                elements: {
-                    line: { borderCapStyle: 'round' }
-                }
-            }
-        });
-    }
-
-    function createGrowthChart() {
-        const canvas = document.getElementById('growth-timeline-chart');
-        if (!canvas) return;
-
-        console.log('Creating growth chart');
-
-        // Clear any existing chart
-        if (activeCharts.growth) {
-            activeCharts.growth.destroy();
-        }
-
-        activeCharts.growth = new Chart(canvas, {
-            type: 'line',
-            data: {
-                labels: data.growth_timeline.periods,
                 datasets: [
                     {
-                        label: 'Ejendomsværdi (€)',
-                        data: data.growth_timeline.property_value,
-                        borderColor: '#1FB8CD',
-                        backgroundColor: 'rgba(31, 184, 205, 0.1)',
-                        borderWidth: 3,
+                        label: 'Akkumulerede årlige lejeindtægter (€)',
+                        data: data.rental_projections.accumulated_income,
+                        borderColor: '#d4af37',
+                        backgroundColor: 'rgba(212, 175, 55, 0.15)',
+                        borderWidth: 5,
                         fill: true,
-                        tension: 0.3,
-                        pointBackgroundColor: '#1FB8CD',
-                        pointBorderColor: '#ffffff',
-                        pointBorderWidth: 2,
-                        pointRadius: 6,
-                        spanGaps: false
-                    },
-                    {
-                        label: 'Akkumulerede lejeindtægter (€)',
-                        data: data.growth_timeline.accumulated_rental,
-                        borderColor: '#00ff66',
-                        backgroundColor: 'rgba(0, 255, 102, 0.1)',
-                        borderWidth: 3,
-                        fill: false,
                         tension: 0.4,
-                        pointBackgroundColor: '#00ff66',
+                        pointBackgroundColor: '#d4af37',
                         pointBorderColor: '#ffffff',
-                        pointBorderWidth: 2,
-                        pointRadius: 6
+                        pointBorderWidth: 4,
+                        pointRadius: 10,
+                        pointHoverRadius: 12,
+                        shadowColor: 'rgba(212, 175, 55, 0.6)',
+                        shadowBlur: 15,
+                        shadowOffsetX: 0,
+                        shadowOffsetY: 0
                     }
                 ]
             },
@@ -334,58 +380,121 @@ document.addEventListener('DOMContentLoaded', function() {
                 plugins: { 
                     legend: { 
                         display: true,
-                        labels: { color: '#ffffff' }
+                        labels: { 
+                            color: '#ffffff',
+                            font: {
+                                size: 16,
+                                weight: '600',
+                                family: "'Inter', sans-serif"
+                            }
+                        }
                     }
                 },
                 scales: {
                     x: { 
-                        ticks: { color: '#ffffff' }, 
-                        grid: { color: 'rgba(255,255,255,0.1)' }
+                        ticks: { 
+                            color: '#ffffff',
+                            font: {
+                                size: 14,
+                                weight: '500',
+                                family: "'Inter', sans-serif"
+                            }
+                        }, 
+                        grid: { 
+                            color: 'rgba(255,255,255,0.1)',
+                            drawBorder: false
+                        }
                     },
                     y: { 
                         ticks: { 
                             color: '#ffffff',
+                            font: {
+                                size: 14,
+                                weight: '500',
+                                family: "'Inter', sans-serif"
+                            },
                             callback: value => '€' + value.toLocaleString()
                         }, 
-                        grid: { color: 'rgba(255,255,255,0.1)' }
+                        grid: { 
+                            color: 'rgba(255,255,255,0.1)',
+                            drawBorder: false
+                        }
                     }
                 },
                 animation: {
-                    duration: 2500, // Reduced from 4000
-                    easing: 'easeOutQuart'
+                    duration: 3000,
+                    easing: 'easeOutQuart',
+                    onProgress: function(animation) {
+                        // Left-to-right reveal animation
+                        const chart = animation.chart;
+                        const ctx = chart.ctx;
+                        const meta = chart.getDatasetMeta(0);
+                        const progress = animation.currentStep / animation.numSteps;
+                        
+                        // Add glow effect
+                        ctx.save();
+                        ctx.shadowColor = 'rgba(212, 175, 55, 0.8)';
+                        ctx.shadowBlur = 20 * progress;
+                        ctx.restore();
+                    }
+                },
+                elements: {
+                    line: {
+                        borderCapStyle: 'round',
+                        borderJoinStyle: 'round'
+                    },
+                    point: {
+                        hoverBackgroundColor: '#ffd700',
+                        hoverBorderColor: '#ffffff',
+                        hoverBorderWidth: 5,
+                        hoverRadius: 15
+                    }
                 }
             }
         });
     }
 
-    function createFDIChart() {
-        const canvas = document.getElementById('fdi-chart');
+    function createCorrectedGrowthChart() {
+        const canvas = document.getElementById('growth-timeline-chart');
         if (!canvas) return;
 
-        console.log('Creating FDI chart');
+        console.log('Opretter corrected værditilvækst chart (stops at Q1 2027)');
 
-        // Clear any existing chart
-        if (activeCharts.fdi) {
-            activeCharts.fdi.destroy();
-        }
-
-        activeCharts.fdi = new Chart(canvas, {
+        activeCharts.growth = new Chart(canvas, {
             type: 'line',
             data: {
-                labels: data.fdi_data.years,
-                datasets: [{
-                    label: 'Udenlandske direkte investeringer (Mio. €)',
-                    data: data.fdi_data.fdi_amounts,
-                    borderColor: '#1FB8CD',
-                    backgroundColor: 'rgba(31, 184, 205, 0.1)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4,
-                    pointBackgroundColor: '#1FB8CD',
-                    pointBorderColor: '#ffffff',
-                    pointBorderWidth: 2,
-                    pointRadius: 6
-                }]
+                labels: data.growth_timeline.periods,
+                datasets: [
+                    {
+                        label: 'Ejendomsværdi (€)',
+                        data: data.growth_timeline.property_value,
+                        borderColor: '#d4af37',
+                        backgroundColor: 'rgba(212, 175, 55, 0.15)',
+                        borderWidth: 5,
+                        fill: true,
+                        tension: 0.2,
+                        pointBackgroundColor: '#d4af37',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 4,
+                        pointRadius: 10,
+                        pointHoverRadius: 12,
+                        spanGaps: false // Don't connect null values
+                    },
+                    {
+                        label: 'Akkumulerede lejeindtægter (€)',
+                        data: data.growth_timeline.accumulated_rental,
+                        borderColor: '#16a085',
+                        backgroundColor: 'rgba(22, 160, 133, 0.15)',
+                        borderWidth: 4,
+                        fill: false,
+                        tension: 0.4,
+                        pointBackgroundColor: '#16a085',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 3,
+                        pointRadius: 8,
+                        pointHoverRadius: 10
+                    }
+                ]
             },
             options: {
                 responsive: true,
@@ -393,28 +502,303 @@ document.addEventListener('DOMContentLoaded', function() {
                 plugins: { 
                     legend: { 
                         display: true,
-                        labels: { color: '#ffffff' }
+                        labels: { 
+                            color: '#ffffff',
+                            font: {
+                                size: 16,
+                                weight: '600',
+                                family: "'Inter', sans-serif"
+                            }
+                        }
                     }
                 },
                 scales: {
                     x: { 
-                        ticks: { color: '#ffffff' }, 
-                        grid: { color: 'rgba(255,255,255,0.1)' }
+                        ticks: { 
+                            color: '#ffffff',
+                            font: {
+                                size: 14,
+                                weight: '500',
+                                family: "'Inter', sans-serif"
+                            }
+                        }, 
+                        grid: { 
+                            color: 'rgba(255,255,255,0.1)',
+                            drawBorder: false
+                        }
                     },
                     y: { 
                         ticks: { 
                             color: '#ffffff',
-                            callback: value => value + ' Mio. €'
+                            font: {
+                                size: 14,
+                                weight: '500',
+                                family: "'Inter', sans-serif"
+                            },
+                            callback: value => '€' + value.toLocaleString()
                         }, 
-                        grid: { color: 'rgba(255,255,255,0.1)' }
+                        grid: { 
+                            color: 'rgba(255,255,255,0.1)',
+                            drawBorder: false
+                        }
                     }
                 },
                 animation: {
-                    duration: 2000, // Reduced from 3500
-                    easing: 'easeOutQuart'
+                    duration: 3500,
+                    easing: 'easeOutQuart',
+                    onProgress: function(animation) {
+                        // Enhanced glow effect for both lines
+                        const chart = animation.chart;
+                        const ctx = chart.ctx;
+                        const progress = animation.currentStep / animation.numSteps;
+                        
+                        ctx.save();
+                        ctx.shadowColor = 'rgba(212, 175, 55, 0.6)';
+                        ctx.shadowBlur = 25 * progress;
+                        ctx.restore();
+                    }
+                },
+                elements: {
+                    line: {
+                        borderCapStyle: 'round',
+                        borderJoinStyle: 'round'
+                    },
+                    point: {
+                        hoverBackgroundColor: '#ffd700',
+                        hoverBorderColor: '#ffffff',
+                        hoverBorderWidth: 5,
+                        hoverRadius: 15
+                    }
                 }
             }
         });
+    }
+
+    function createEnhancedFDIChart() {
+        const canvas = document.getElementById('fdi-chart');
+        if (!canvas) return;
+
+        console.log('Opretter enhanced FDI chart');
+
+        activeCharts.fdi = new Chart(canvas, {
+            type: 'line',
+            data: {
+                labels: data.fdi_data.years,
+                datasets: [
+                    {
+                        label: 'Udenlandske direkte investeringer (Mio. €)',
+                        data: data.fdi_data.fdi_amounts,
+                        borderColor: '#16a085',
+                        backgroundColor: 'rgba(22, 160, 133, 0.15)',
+                        borderWidth: 5,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#16a085',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 4,
+                        pointRadius: 10,
+                        pointHoverRadius: 12
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        display: true,
+                        labels: { 
+                            color: '#ffffff',
+                            font: {
+                                size: 16,
+                                weight: '600',
+                                family: "'Inter', sans-serif"
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: { 
+                        ticks: { 
+                            color: '#ffffff',
+                            font: {
+                                size: 14,
+                                weight: '500',
+                                family: "'Inter', sans-serif"
+                            }
+                        }, 
+                        grid: { 
+                            color: 'rgba(255,255,255,0.1)',
+                            drawBorder: false
+                        }
+                    },
+                    y: { 
+                        ticks: { 
+                            color: '#ffffff',
+                            font: {
+                                size: 14,
+                                weight: '500',
+                                family: "'Inter', sans-serif"
+                            },
+                            callback: value => value + ' Mio. €'
+                        }, 
+                        grid: { 
+                            color: 'rgba(255,255,255,0.1)',
+                            drawBorder: false
+                        }
+                    }
+                },
+                animation: {
+                    duration: 3000,
+                    easing: 'easeOutQuart',
+                    onProgress: function(animation) {
+                        // Green glow effect
+                        const chart = animation.chart;
+                        const ctx = chart.ctx;
+                        const progress = animation.currentStep / animation.numSteps;
+                        
+                        ctx.save();
+                        ctx.shadowColor = 'rgba(22, 160, 133, 0.6)';
+                        ctx.shadowBlur = 20 * progress;
+                        ctx.restore();
+                    }
+                },
+                elements: {
+                    line: {
+                        borderCapStyle: 'round',
+                        borderJoinStyle: 'round'
+                    },
+                    point: {
+                        hoverBackgroundColor: '#20b2aa',
+                        hoverBorderColor: '#ffffff',
+                        hoverBorderWidth: 5,
+                        hoverRadius: 15
+                    }
+                }
+            }
+        });
+    }
+
+    // Updated dialog functions
+    function showContactDialog() {
+        console.log('Åbner kontakt dialog...');
+        const dialog = createStyledDialog(
+            'Kontakt os',
+            `
+            <div style="text-align: center; padding: 25px;">
+                <div style="font-size: 48px; color: #d4af37; margin-bottom: 20px;">📞</div>
+                <h3 style="color: #d4af37; margin-bottom: 18px; font-family: 'Playfair Display', serif;">Kontakt Bellevue Residence</h3>
+                <p style="color: rgba(255,255,255,0.9); margin-bottom: 25px; line-height: 1.7; font-size: 16px;">
+                    Vil du vide mere om Bellevue Residence? Kontakt vores eksperter for personlig rådgivning om denne unikke investering.
+                </p>
+                <div style="background: rgba(212, 175, 55, 0.12); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 15px; padding: 25px; margin: 25px 0;">
+                    <p style="color: #d4af37; font-weight: bold; margin-bottom: 12px; font-size: 16px;">Vi kan hjælpe med:</p>
+                    <p style="color: rgba(255,255,255,0.85); font-size: 15px; line-height: 1.6;">
+                        • Ejendomsvisning og enhedsvalg<br>
+                        • Detaljeret transaktionsanalyse<br>
+                        • Finansieringsmuligheder<br>
+                        • Juridisk rådgivning og kontrakter
+                    </p>
+                </div>
+                <button onclick="closeDialog()" style="background: linear-gradient(135deg, #d4af37 0%, #ffd700 50%, #b8860b 100%); color: #000; border: none; padding: 14px 35px; border-radius: 30px; font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 14px; box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4); font-family: 'Playfair Display', serif; letter-spacing: 1px;">
+                    Luk
+                </button>
+            </div>
+            `
+        );
+        
+        console.log('Kontakt interesse registreret for Bellevue Residence');
+    }
+
+    function showBrochureDialog() {
+        console.log('Åbner brochure dialog...');
+        const dialog = createStyledDialog(
+            'Download brochure',
+            `
+            <div style="text-align: center; padding: 25px;">
+                <div style="font-size: 48px; color: #16a085; margin-bottom: 20px;">📋</div>
+                <h3 style="color: #16a085; margin-bottom: 18px; font-family: 'Playfair Display', serif;">Få den komplette brochure</h3>
+                <p style="color: rgba(255,255,255,0.9); margin-bottom: 25px; line-height: 1.7; font-size: 16px;">
+                    Download den detaljerede brochure med alle informationer om Bellevue Residence og investeringsmuligheden.
+                </p>
+                <div style="background: rgba(22, 160, 133, 0.12); border: 1px solid rgba(22, 160, 133, 0.35); border-radius: 15px; padding: 25px; margin: 25px 0;">
+                    <p style="color: #16a085; font-weight: bold; margin-bottom: 12px; font-size: 16px;">Brochuren indeholder:</p>
+                    <p style="color: rgba(255,255,255,0.85); font-size: 15px; line-height: 1.6;">
+                        • Komplet transaktionsanalyse (€143.000)<br>
+                        • Projekterede 11,7% årlige lejeindtægter<br>
+                        • 66,3% værditilvækst over 3 år<br>
+                        • Plantegninger og højkvalitetsbilleder<br>
+                        • Juridiske vilkår og betalingsplan
+                    </p>
+                </div>
+                <button onclick="closeDialog()" style="background: linear-gradient(135deg, #16a085 0%, #20b2aa 100%); color: #fff; border: none; padding: 14px 35px; border-radius: 30px; font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 14px; box-shadow: 0 6px 20px rgba(22, 160, 133, 0.4); font-family: 'Playfair Display', serif; letter-spacing: 1px;">
+                    Luk
+                </button>
+            </div>
+            `
+        );
+    }
+
+    function createStyledDialog(title, content) {
+        const dialog = document.createElement('div');
+        dialog.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            backdrop-filter: blur(15px);
+        `;
+        
+        dialog.innerHTML = `
+            <div style="
+                background: linear-gradient(135deg, #1a2332 0%, #0f1419 100%);
+                border: 1px solid rgba(212, 175, 55, 0.35);
+                border-radius: 25px;
+                max-width: 550px;
+                max-height: 80vh;
+                overflow-y: auto;
+                box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+                position: relative;
+                backdrop-filter: blur(20px);
+            ">
+                <div style="
+                    background: linear-gradient(135deg, #d4af37 0%, #ffd700 30%, #b8860b 100%);
+                    color: #000;
+                    padding: 25px;
+                    text-align: center;
+                    font-weight: bold;
+                    font-size: 20px;
+                    text-transform: uppercase;
+                    letter-spacing: 1.5px;
+                    font-family: 'Playfair Display', serif;
+                ">
+                    ${title}
+                </div>
+                ${content}
+            </div>
+        `;
+        
+        // Luk på baggrund klik
+        dialog.addEventListener('click', function(e) {
+            if (e.target === dialog) {
+                closeDialog();
+            }
+        });
+        
+        document.body.appendChild(dialog);
+        
+        // Gør closeDialog globalt tilgængelig
+        window.closeDialog = function() {
+            document.body.removeChild(dialog);
+        };
+        
+        return dialog;
     }
 
     // Keyboard navigation
@@ -428,5 +812,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    console.log('Bellevue Residence JavaScript loaded with controlled animations');
+    console.log('Bellevue Residence app indlæst med matching gold boxes og 11.7% correction');
 });
