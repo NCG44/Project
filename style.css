@@ -738,66 +738,72 @@ select.form-control {
 }
 
 /* END PERPLEXITY DESIGN SYSTEM */
-/* HIGH-TECH BELLEVUE RESIDENCE - Enhanced with Design System */
-
-/* Import design system font */
-@font-face {
-  font-family: 'FKGroteskNeue';
-  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2') format('woff2');
-}
+/* CORRECTED HIGH-TECH BELLEVUE RESIDENCE - Aligned with Design System */
 
 :root {
-  /* Enhanced Typography using design system */
+  /* Enhanced Typography using Design System */
   --font-family-primary: var(--font-family-base);
   --font-family-secondary: var(--font-family-base);
   
-  /* HIGH-TECH COLOR PALETTE using design system colors */
-  --color-luxury-gold: linear-gradient(135deg, var(--color-orange-400) 0%, var(--color-orange-500) 50%, var(--color-brown-600) 100%);
-  --color-luxury-gold-solid: var(--color-orange-400);
-  --color-luxury-navy: var(--color-slate-900);
-  --color-luxury-cream: var(--color-cream-100);
-  --color-urgent-red: var(--color-red-400);
+  /* Enhanced Font Sizes using Design System */
+  --font-size-xs: var(--font-size-xs);
+  --font-size-sm: var(--font-size-sm);
+  --font-size-base: var(--font-size-base);
+  --font-size-lg: var(--font-size-lg);
+  --font-size-xl: var(--font-size-xl);
+  --font-size-2xl: var(--font-size-2xl);
+  --font-size-3xl: var(--font-size-3xl);
+  --font-size-4xl: var(--font-size-4xl);
+  --font-size-5xl: 32px;
+  --font-size-6xl: 36px;
+  
+  /* COLOR PALETTE using Design System */
+  --color-luxury-gold: var(--color-primary);
+  --color-luxury-gold-solid: var(--color-primary);
+  --color-luxury-navy: var(--color-text);
+  --color-luxury-cream: var(--color-surface);
+  --color-urgent-red: var(--color-error);
   --color-success-green: var(--color-success);
   
-  /* ENHANCED BLUE THEME using design system */
-  --color-tech-blue: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 30%, var(--color-primary-active) 70%, var(--color-slate-900) 100%);
+  /* TECH THEME COLORS using Design System */
+  --color-tech-blue: var(--color-primary);
   --color-tech-blue-solid: var(--color-primary);
   --color-tech-blue-light: rgba(var(--color-teal-500-rgb), 0.2);
   --color-tech-blue-glow: rgba(var(--color-teal-500-rgb), 0.4);
-  --color-tech-cyan: linear-gradient(135deg, var(--color-teal-400) 0%, var(--color-teal-500) 30%, var(--color-teal-600) 70%, var(--color-teal-700) 100%);
-  --color-tech-cyan-solid: var(--color-teal-400);
-  --color-tech-cyan-glow: rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.4);
+  --color-tech-cyan: var(--color-primary-hover);
+  --color-tech-cyan-solid: var(--color-primary-hover);
+  --color-tech-cyan-glow: rgba(var(--color-teal-500-rgb), 0.4);
   
-  /* Enhanced Gold Gradient for Number Boxes using design system */
-  --color-luxury-gold-enhanced: linear-gradient(135deg, var(--color-orange-400) 0%, var(--color-orange-500) 30%, var(--color-brown-600) 70%, var(--color-orange-500) 100%);
-  --color-luxury-gold-glow: rgba(var(--color-orange-400-rgb), 0.6);
+  /* CORRECTED: Gold Gradient using Design System */
+  --color-luxury-gold-enhanced: var(--color-primary);
+  --color-luxury-gold-glow: var(--color-focus-ring);
   
-  /* HIGH-TECH GLOW EFFECTS using design system colors */
-  --glow-blue: 0 0 var(--space-20) rgba(var(--color-teal-500-rgb), 0.4), 0 0 var(--space-32) rgba(var(--color-teal-500-rgb), 0.2);
-  --glow-cyan: 0 0 var(--space-20) rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.4), 0 0 var(--space-32) rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.2);
-  --glow-gold: 0 0 var(--space-20) rgba(var(--color-orange-400-rgb), 0.4), 0 0 var(--space-32) rgba(var(--color-orange-400-rgb), 0.2);
-  --glow-white: 0 0 var(--space-20) rgba(255, 255, 255, 0.3), 0 0 var(--space-32) rgba(255, 255, 255, 0.1);
+  /* HIGH-TECH GLOW EFFECTS using Design System */
+  --glow-blue: var(--focus-ring);
+  --glow-cyan: var(--focus-ring);
+  --glow-gold: var(--focus-ring);
+  --glow-white: 0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 255, 255, 0.1);
 }
 
-/* ADVANCED HIGH-TECH ANIMATIONS using design system timing */
+/* ADVANCED HIGH-TECH ANIMATIONS */
 @keyframes techFloat {
   0%, 100% { 
     transform: translateY(0px) rotateX(0deg); 
-    box-shadow: var(--glow-blue);
+    box-shadow: var(--shadow-md);
   }
   50% { 
     transform: translateY(-8px) rotateX(1deg); 
-    box-shadow: var(--glow-blue), 0 15px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-lg);
   }
 }
 
 @keyframes techGlow {
   0%, 100% { 
-    box-shadow: var(--shadow-lg), var(--glow-blue);
+    box-shadow: var(--shadow-md);
     filter: brightness(1);
   }
   50% { 
-    box-shadow: var(--shadow-lg), var(--glow-blue), var(--glow-cyan);
+    box-shadow: var(--shadow-lg);
     filter: brightness(1.1);
   }
 }
@@ -805,11 +811,11 @@ select.form-control {
 @keyframes techPulse {
   0%, 100% { 
     transform: scale(1);
-    box-shadow: var(--glow-blue);
+    box-shadow: var(--shadow-md);
   }
   50% { 
     transform: scale(1.05);
-    box-shadow: var(--glow-blue), var(--glow-cyan);
+    box-shadow: var(--shadow-lg);
   }
 }
 
@@ -870,16 +876,16 @@ select.form-control {
     filter: brightness(1);
   }
   25% {
-    transform: translateX(var(--space-4)) scale(1.02);
+    transform: translateX(5px) scale(1.02);
     filter: brightness(1.1);
   }
   75% {
-    transform: translateX(calc(var(--space-4) * -1)) scale(0.98);
+    transform: translateX(-5px) scale(0.98);
     filter: brightness(0.9);
   }
 }
 
-/* Base Styles with Enhanced High-Tech Look using design system */
+/* Base Styles with Enhanced High-Tech Look */
 * {
   margin: 0;
   padding: 0;
@@ -890,10 +896,7 @@ body {
   font-family: var(--font-family-base);
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
-  background: 
-    linear-gradient(135deg, var(--color-charcoal-700) 0%, var(--color-charcoal-800) 25%, rgba(var(--color-teal-500-rgb), 0.15) 50%, var(--color-charcoal-800) 75%, var(--color-charcoal-700) 100%),
-    radial-gradient(circle at 20% 30%, rgba(var(--color-teal-500-rgb), 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.03) 0%, transparent 50%);
+  background: var(--color-background);
   color: var(--color-text);
   overflow-x: hidden;
   min-height: 100vh;
@@ -902,7 +905,7 @@ body {
   position: relative;
 }
 
-/* ANIMATED BACKGROUND PARTICLES using design system colors */
+/* ANIMATED BACKGROUND PARTICLES */
 body::before {
   content: '';
   position: fixed;
@@ -911,10 +914,10 @@ body::before {
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(circle at 10% 20%, rgba(var(--color-teal-500-rgb), 0.02) 0%, transparent 30%),
-    radial-gradient(circle at 90% 80%, rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.02) 0%, transparent 30%),
-    radial-gradient(circle at 50% 50%, rgba(var(--color-orange-400-rgb), 0.01) 0%, transparent 40%);
-  animation: holographic 10s var(--ease-standard) infinite;
+    radial-gradient(circle at 10% 20%, var(--color-secondary) 0%, transparent 30%),
+    radial-gradient(circle at 90% 80%, var(--color-secondary) 0%, transparent 30%),
+    radial-gradient(circle at 50% 50%, var(--color-secondary) 0%, transparent 40%);
+  animation: holographic 10s ease-in-out infinite;
   z-index: -1;
   pointer-events: none;
 }
@@ -926,33 +929,33 @@ body::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, transparent 48%, rgba(var(--color-teal-500-rgb), 0.02) 50%, transparent 52%);
-  animation: techScan 8s var(--ease-standard) infinite;
+  background: linear-gradient(45deg, transparent 48%, var(--color-secondary) 50%, transparent 52%);
+  animation: techScan 8s ease-in-out infinite;
   z-index: -1;
   pointer-events: none;
 }
 
 .container {
-  max-width: var(--container-lg);
+  max-width: var(--container-xl);
   margin: 0 auto;
   padding: var(--space-20);
   position: relative;
   z-index: 1;
 }
 
-/* ENHANCED HEADER with Tech Effects using design system */
+/* ENHANCED HEADER with Tech Effects */
 .app-header {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: var(--space-32) 0 var(--space-20) 0;
-  margin-bottom: var(--space-24);
-  border-bottom: var(--space-2) solid transparent;
-  background: linear-gradient(90deg, transparent, rgba(var(--color-teal-500-rgb), 0.3), transparent);
-  background-size: 200% var(--space-2);
+  margin-bottom: var(--space-32);
+  border-bottom: 2px solid transparent;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  background-size: 200% 2px;
   background-repeat: no-repeat;
   background-position: 0 100%;
-  animation: dataStream 3s var(--ease-standard) infinite;
+  animation: dataStream 3s ease-in-out infinite;
   position: relative;
   overflow: hidden;
 }
@@ -964,8 +967,8 @@ body::after {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(var(--color-teal-500-rgb), 0.1), transparent);
-  animation: techScan 4s var(--ease-standard) infinite;
+  background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
+  animation: techScan 4s ease-in-out infinite;
   z-index: -1;
 }
 
@@ -974,18 +977,18 @@ body::after {
   width: auto;
   transition: all var(--duration-normal) var(--ease-standard);
   display: block;
-  filter: drop-shadow(0 0 var(--space-16) rgba(var(--color-teal-500-rgb), 0.3));
+  filter: drop-shadow(0 0 15px var(--color-focus-ring));
   position: relative;
 }
 
 .company-logo::before {
   content: '';
   position: absolute;
-  top: -var(--space-10);
-  left: -var(--space-10);
-  right: -var(--space-10);
-  bottom: -var(--space-10);
-  background: radial-gradient(circle, rgba(var(--color-teal-500-rgb), 0.2) 0%, transparent 70%);
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: radial-gradient(circle, var(--color-secondary) 0%, transparent 70%);
   border-radius: var(--radius-full);
   opacity: 0;
   transition: opacity var(--duration-normal) ease;
@@ -994,13 +997,13 @@ body::after {
 
 .company-logo:hover {
   transform: scale(1.1) rotateY(10deg);
-  filter: drop-shadow(0 0 var(--space-24) rgba(var(--color-teal-500-rgb), 0.6)) brightness(1.2);
-  animation: techPulse 2s var(--ease-standard) infinite;
+  filter: drop-shadow(0 0 25px var(--color-focus-ring)) brightness(1.2);
+  animation: techPulse 2s ease-in-out infinite;
 }
 
 .company-logo:hover::before {
   opacity: 1;
-  animation: techGlow 2s var(--ease-standard) infinite;
+  animation: techGlow 2s ease-in-out infinite;
 }
 
 .company-name {
@@ -1012,20 +1015,19 @@ body::after {
   text-align: center;
   margin-top: var(--space-20);
   text-transform: uppercase;
-  background: linear-gradient(45deg, var(--color-text) 30%, var(--color-primary) 50%, var(--color-teal-400) 70%, var(--color-text) 90%);
+  background: linear-gradient(45deg, var(--color-text) 30%, var(--color-primary) 50%, var(--color-primary-hover) 70%, var(--color-text) 90%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: holographic 4s var(--ease-standard) infinite;
-  text-shadow: 0 0 var(--space-24) rgba(var(--color-teal-500-rgb), 0.3);
+  animation: holographic 4s ease-in-out infinite;
 }
 
 .company-name:hover {
-  animation: holographic 1s var(--ease-standard) infinite, techPulse 2s var(--ease-standard) infinite;
+  animation: holographic 1s ease-in-out infinite, techPulse 2s ease-in-out infinite;
 }
 
-/* ENHANCED NAVIGATION with High-Tech Effects using design system */
+/* ENHANCED NAVIGATION with High-Tech Effects */
 .breadcrumb-nav {
   display: flex;
   justify-content: center;
@@ -1043,8 +1045,8 @@ body::after {
   top: 50%;
   left: 0;
   right: 0;
-  height: var(--space-1);
-  background: linear-gradient(90deg, transparent, rgba(var(--color-teal-500-rgb), 0.5), transparent);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-border), transparent);
   transform: translateY(-50%);
   z-index: -1;
 }
@@ -1053,8 +1055,8 @@ body::after {
   position: relative;
   padding: var(--space-12) var(--space-24);
   border-radius: var(--radius-full);
-  background: rgba(var(--color-teal-500-rgb), 0.1);
-  border: var(--space-1) solid rgba(var(--color-teal-500-rgb), 0.3);
+  background: var(--color-secondary);
+  border: 1px solid var(--color-border);
   cursor: pointer;
   transition: all var(--duration-normal) var(--ease-standard);
   font-size: var(--font-size-sm);
@@ -1063,6 +1065,7 @@ body::after {
   backdrop-filter: blur(10px);
   overflow: hidden;
   transform-style: preserve-3d;
+  color: var(--color-text);
 }
 
 .breadcrumb::before {
@@ -1072,7 +1075,7 @@ body::after {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(var(--color-teal-500-rgb), 0.4), transparent);
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
   transition: left 0.6s ease;
   z-index: -1;
 }
@@ -1084,17 +1087,17 @@ body::after {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at center, rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle at center, var(--color-secondary) 0%, transparent 70%);
   opacity: 0;
   transition: opacity var(--duration-normal) ease;
 }
 
 .breadcrumb:hover {
-  background: rgba(var(--color-teal-500-rgb), 0.2);
-  border-color: rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.6);
-  transform: translateY(-var(--space-4)) rotateX(5deg) scale(1.05);
-  box-shadow: var(--glow-blue), var(--shadow-md);
-  animation: techGlow 1s var(--ease-standard);
+  background: var(--color-secondary-hover);
+  border-color: var(--color-primary);
+  transform: translateY(-4px) rotateX(5deg) scale(1.05);
+  box-shadow: var(--shadow-md);
+  animation: techGlow 1s ease-in-out;
 }
 
 .breadcrumb:hover::before {
@@ -1106,17 +1109,17 @@ body::after {
 }
 
 .breadcrumb.active {
-  background: var(--color-tech-blue);
-  border: var(--space-1) solid var(--color-primary);
+  background: var(--color-primary);
+  border: 1px solid var(--color-primary);
   color: var(--color-btn-primary-text);
   font-weight: var(--font-weight-semibold);
-  box-shadow: var(--glow-blue);
-  animation: techFloat 3s var(--ease-standard) infinite;
+  box-shadow: var(--shadow-md);
+  animation: techFloat 3s ease-in-out infinite;
 }
 
 .breadcrumb.active:hover {
-  transform: translateY(-var(--space-4)) rotateX(5deg) scale(1.1);
-  animation: techFloat 3s var(--ease-standard) infinite, techPulse 2s var(--ease-standard) infinite;
+  transform: translateY(-4px) rotateX(5deg) scale(1.1);
+  animation: techFloat 3s ease-in-out infinite, techPulse 2s ease-in-out infinite;
 }
 
 /* ENHANCED SECTIONS */
@@ -1145,17 +1148,15 @@ body::after {
 }
 
 .content-wrapper {
-  background: 
-    linear-gradient(135deg, rgba(var(--color-teal-500-rgb), 0.05) 0%, rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.03) 50%, rgba(var(--color-teal-500-rgb), 0.05) 100%),
-    var(--color-surface);
+  background: var(--color-surface);
   border-radius: var(--radius-lg);
-  padding: 60px;
-  border: var(--space-1) solid rgba(var(--color-teal-500-rgb), 0.2);
+  padding: var(--space-32) var(--space-32);
+  border: 1px solid var(--color-border);
   backdrop-filter: blur(20px);
   position: relative;
   overflow: visible;
   transition: all var(--duration-normal) var(--ease-standard);
-  box-shadow: var(--shadow-lg), inset 0 var(--space-1) 0 rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-lg);
 }
 
 .content-wrapper::before {
@@ -1165,7 +1166,7 @@ body::after {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(var(--color-teal-500-rgb), 0.03) 0%, transparent 50%, rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.03) 100%);
+  background: var(--color-secondary);
   border-radius: var(--radius-lg);
   opacity: 0;
   transition: opacity var(--duration-normal) ease;
@@ -1173,19 +1174,17 @@ body::after {
 }
 
 .content-wrapper:hover {
-  background: 
-    linear-gradient(135deg, rgba(var(--color-teal-500-rgb), 0.08) 0%, rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.06) 50%, rgba(var(--color-teal-500-rgb), 0.08) 100%),
-    var(--color-surface);
-  border-color: rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.4);
-  transform: translateY(-var(--space-4)) scale(1.01);
-  box-shadow: var(--glow-blue), var(--shadow-lg);
+  background: var(--color-surface);
+  border-color: var(--color-primary);
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: var(--shadow-lg);
 }
 
 .content-wrapper:hover::before {
   opacity: 1;
 }
 
-/* ENHANCED HERO SECTION using design system */
+/* ENHANCED HERO SECTION */
 .hero-section-with-image {
   display: grid;
   grid-template-columns: 1fr 400px;
@@ -1197,11 +1196,11 @@ body::after {
 
 .hero-image-container {
   position: relative;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-lg), var(--glow-blue);
+  box-shadow: var(--shadow-lg);
   min-height: 300px;
-  background: rgba(var(--color-teal-500-rgb), 0.1);
+  background: var(--color-secondary);
   transition: all var(--duration-normal) var(--ease-standard);
   transform-style: preserve-3d;
 }
@@ -1213,7 +1212,7 @@ body::after {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, rgba(var(--color-teal-500-rgb), 0.2), rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.2));
+  background: linear-gradient(45deg, var(--color-primary), var(--color-primary-hover));
   opacity: 0;
   transition: opacity var(--duration-normal) ease;
   z-index: 1;
@@ -1223,13 +1222,13 @@ body::after {
 .hero-image-container::after {
   content: '';
   position: absolute;
-  top: -var(--space-2);
-  left: -var(--space-2);
-  right: -var(--space-2);
-  bottom: -var(--space-2);
-  background: linear-gradient(45deg, var(--color-primary), var(--color-teal-400), var(--color-primary));
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--color-primary), var(--color-primary-hover), var(--color-primary));
   background-size: 200% 200%;
-  border-radius: calc(var(--radius-md) + var(--space-2));
+  border-radius: calc(var(--radius-lg) + 2px);
   z-index: -1;
   animation: holographic 3s linear infinite;
   opacity: 0;
@@ -1237,9 +1236,9 @@ body::after {
 }
 
 .hero-image-container:hover {
-  transform: translateY(-var(--space-8)) rotateY(5deg) scale(1.03);
-  box-shadow: var(--glow-blue), var(--glow-cyan), var(--shadow-lg);
-  animation: techFloat 2s var(--ease-standard) infinite;
+  transform: translateY(-8px) rotateY(5deg) scale(1.03);
+  box-shadow: var(--shadow-lg);
+  animation: techFloat 2s ease-in-out infinite;
 }
 
 .hero-image-container:hover::before {
@@ -1258,7 +1257,7 @@ body::after {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
-  background: rgba(var(--color-teal-500-rgb), 0.1);
+  background: var(--color-secondary);
   filter: contrast(1.1) saturate(1.1);
 }
 
@@ -1280,34 +1279,32 @@ img:not(.company-logo) {
   transform: none !important;
 }
 
-/* ENHANCED TYPOGRAPHY with Tech Effects using design system */
+/* ENHANCED TYPOGRAPHY with Tech Effects */
 h1 {
   font-family: var(--font-family-base);
   font-size: var(--font-size-4xl);
   font-weight: var(--font-weight-bold);
   margin-bottom: var(--space-20);
-  background: linear-gradient(135deg, var(--color-orange-400) 0%, var(--color-text) 30%, var(--color-primary) 60%, var(--color-teal-400) 90%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-text) 30%, var(--color-primary) 60%, var(--color-primary-hover) 90%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   line-height: var(--line-height-tight);
   letter-spacing: var(--letter-spacing-tight);
-  animation: holographic 6s var(--ease-standard) infinite;
-  text-shadow: 0 0 var(--space-24) rgba(var(--color-teal-500-rgb), 0.3);
+  animation: holographic 6s ease-in-out infinite;
   transition: all var(--duration-normal) ease;
 }
 
 h1:hover {
-  animation: holographic 2s var(--ease-standard) infinite, quantumShift 1s var(--ease-standard) infinite;
-  text-shadow: 0 0 50px rgba(var(--color-teal-500-rgb), 0.6);
+  animation: holographic 2s ease-in-out infinite, quantumShift 1s ease-in-out infinite;
 }
 
 h2 {
   font-family: var(--font-family-base);
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-medium);
-  margin-bottom: var(--space-32);
+  margin-bottom: var(--space-24);
   color: var(--color-text-secondary);
   line-height: var(--line-height-normal);
   transition: all var(--duration-normal) ease;
@@ -1317,17 +1314,16 @@ h2 {
 h2::after {
   content: '';
   position: absolute;
-  bottom: -var(--space-4);
+  bottom: -5px;
   left: 0;
   width: 0;
-  height: var(--space-2);
-  background: linear-gradient(90deg, var(--color-primary), var(--color-teal-400));
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-hover));
   transition: width var(--duration-normal) ease;
 }
 
 h2:hover {
   color: var(--color-text);
-  text-shadow: 0 0 var(--space-20) rgba(var(--color-teal-500-rgb), 0.4);
 }
 
 h2:hover::after {
@@ -1338,20 +1334,19 @@ h3 {
   font-family: var(--font-family-base);
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-semibold);
-  margin-bottom: var(--space-24);
-  background: linear-gradient(45deg, var(--color-orange-400), var(--color-primary), var(--color-teal-400));
+  margin-bottom: var(--space-20);
+  background: linear-gradient(45deg, var(--color-primary), var(--color-primary-hover), var(--color-primary));
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: holographic 5s var(--ease-standard) infinite;
+  animation: holographic 5s ease-in-out infinite;
   transition: all var(--duration-normal) ease;
 }
 
 h3:hover {
-  animation: holographic 1s var(--ease-standard) infinite;
-  transform: translateX(var(--space-10));
-  text-shadow: 0 0 var(--space-20) rgba(var(--color-teal-500-rgb), 0.5);
+  animation: holographic 1s ease-in-out infinite;
+  transform: translateX(10px);
 }
 
 h4 {
@@ -1366,8 +1361,7 @@ h4 {
 
 h4:hover {
   color: var(--color-primary);
-  text-shadow: 0 0 var(--space-16) rgba(var(--color-teal-500-rgb), 0.4);
-  transform: translateX(var(--space-4));
+  transform: translateX(5px);
 }
 
 p {
@@ -1382,13 +1376,12 @@ p {
 
 p:hover {
   color: var(--color-text);
-  text-shadow: 0 0 var(--space-10) rgba(var(--color-teal-500-rgb), 0.2);
 }
 
-/* ENHANCED HERO BADGE with Tech Effects using design system */
+/* ENHANCED HERO BADGE with Tech Effects */
 .hero-badge {
   display: inline-block;
-  background: var(--color-tech-blue);
+  background: var(--color-primary);
   color: var(--color-btn-primary-text);
   padding: var(--space-12) var(--space-24);
   border-radius: var(--radius-full);
@@ -1396,14 +1389,14 @@ p:hover {
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  margin-bottom: var(--space-24);
-  animation: techFloat 4s var(--ease-standard) infinite;
-  box-shadow: var(--glow-blue);
+  margin-bottom: var(--space-20);
+  animation: techFloat 4s ease-in-out infinite;
+  box-shadow: var(--shadow-md);
   font-family: var(--font-family-base);
   transition: all var(--duration-normal) var(--ease-standard);
   position: relative;
   overflow: hidden;
-  border: var(--space-1) solid rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.3);
+  border: 1px solid var(--color-border);
 }
 
 .hero-badge::before {
@@ -1413,18 +1406,18 @@ p:hover {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.4), transparent);
-  animation: techScan 3s var(--ease-standard) infinite;
+  background: linear-gradient(90deg, transparent, var(--color-primary-hover), transparent);
+  animation: techScan 3s ease-in-out infinite;
 }
 
 .hero-badge:hover {
-  transform: scale(1.1) translateY(-var(--space-4));
-  box-shadow: var(--glow-blue), var(--glow-cyan);
-  background: var(--color-tech-cyan);
-  animation: techFloat 4s var(--ease-standard) infinite, techPulse 2s var(--ease-standard) infinite;
+  transform: scale(1.1) translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  background: var(--color-primary-hover);
+  animation: techFloat 4s ease-in-out infinite, techPulse 2s ease-in-out infinite;
 }
 
-/* ENHANCED KEY METRICS GRID with High-Tech Effects using design system */
+/* ENHANCED KEY METRICS GRID with High-Tech Effects */
 .key-metrics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -1434,12 +1427,10 @@ p:hover {
 }
 
 .metric-card {
-  background: 
-    linear-gradient(135deg, rgba(var(--color-teal-500-rgb), 0.1) 0%, rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.05) 100%),
-    var(--color-surface);
-  border: var(--space-1) solid rgba(var(--color-teal-500-rgb), 0.3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  padding: var(--space-32);
+  padding: var(--space-24);
   text-align: center;
   transition: all var(--duration-normal) var(--ease-standard);
   position: relative;
@@ -1457,7 +1448,7 @@ p:hover {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, transparent, rgba(var(--color-teal-500-rgb), 0.2), rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.2), transparent);
+  background: linear-gradient(45deg, transparent, var(--color-primary), var(--color-primary-hover), transparent);
   transition: left 0.8s ease;
   z-index: -1;
 }
@@ -1465,13 +1456,13 @@ p:hover {
 .metric-card::after {
   content: '';
   position: absolute;
-  top: -var(--space-2);
-  left: -var(--space-2);
-  right: -var(--space-2);
-  bottom: -var(--space-2);
-  background: linear-gradient(45deg, var(--color-primary), var(--color-teal-400), var(--color-primary));
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--color-primary), var(--color-primary-hover), var(--color-primary));
   background-size: 200% 200%;
-  border-radius: calc(var(--radius-lg) + var(--space-2));
+  border-radius: calc(var(--radius-lg) + 2px);
   z-index: -2;
   animation: holographic 4s linear infinite;
   opacity: 0;
@@ -1479,12 +1470,10 @@ p:hover {
 }
 
 .metric-card:hover {
-  background: 
-    linear-gradient(135deg, rgba(var(--color-teal-500-rgb), 0.15) 0%, rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.1) 100%),
-    var(--color-surface);
-  transform: translateY(-var(--space-10)) rotateX(5deg) scale(1.05);
-  box-shadow: var(--glow-blue), var(--glow-cyan), var(--shadow-lg);
-  animation: techFloat 2s var(--ease-standard) infinite;
+  background: var(--color-surface);
+  transform: translateY(-10px) rotateX(5deg) scale(1.05);
+  box-shadow: var(--shadow-lg);
+  animation: techFloat 2s ease-in-out infinite;
 }
 
 .metric-card:hover::before {
@@ -1496,37 +1485,33 @@ p:hover {
 }
 
 .metric-card.urgent-card {
-  border-color: var(--color-urgent-red);
-  background: 
-    linear-gradient(135deg, rgba(var(--color-red-400-rgb), 0.1) 0%, rgba(var(--color-teal-500-rgb), 0.05) 100%),
-    var(--color-surface);
+  border-color: var(--color-error);
+  background: var(--color-surface);
 }
 
 .metric-card.urgent-card:hover {
-  box-shadow: 0 0 var(--space-20) rgba(var(--color-red-400-rgb), 0.4), var(--glow-blue), var(--shadow-lg);
-  animation: techFloat 2s var(--ease-standard) infinite, techPulse 1.5s var(--ease-standard) infinite;
+  box-shadow: var(--shadow-lg);
+  animation: techFloat 2s ease-in-out infinite, techPulse 1.5s ease-in-out infinite;
 }
 
 .metric-value {
   font-family: var(--font-family-base);
   font-size: var(--font-size-4xl);
   font-weight: var(--font-weight-bold);
-  background: linear-gradient(45deg, var(--color-orange-400), var(--color-primary), var(--color-teal-400));
+  background: linear-gradient(45deg, var(--color-primary), var(--color-primary-hover), var(--color-primary));
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: var(--space-12);
-  text-shadow: 0 0 var(--space-20) rgba(var(--color-teal-500-rgb), 0.3);
   letter-spacing: var(--letter-spacing-tight);
   transition: all var(--duration-normal) ease;
-  animation: holographic 6s var(--ease-standard) infinite;
+  animation: holographic 6s ease-in-out infinite;
 }
 
 .metric-card:hover .metric-value {
   transform: scale(1.1);
-  animation: holographic 2s var(--ease-standard) infinite, quantumShift 1s var(--ease-standard) infinite;
-  text-shadow: 0 0 var(--space-24) rgba(var(--color-teal-500-rgb), 0.6);
+  animation: holographic 2s ease-in-out infinite, quantumShift 1s ease-in-out infinite;
 }
 
 .metric-label {
@@ -1541,7 +1526,6 @@ p:hover {
 
 .metric-card:hover .metric-label {
   color: var(--color-primary);
-  text-shadow: 0 0 var(--space-10) rgba(var(--color-teal-500-rgb), 0.4);
 }
 
 .metric-sublabel {
@@ -1556,12 +1540,10 @@ p:hover {
   color: var(--color-text);
 }
 
-/* ENHANCED MARKET MOMENTUM with Tech Effects using design system */
+/* ENHANCED MARKET MOMENTUM with Tech Effects */
 .market-momentum {
-  background: 
-    linear-gradient(135deg, rgba(var(--color-teal-500-rgb), 0.08) 0%, rgba(var(--color-orange-400-rgb), 0.03) 50%, rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.08) 100%),
-    var(--color-surface);
-  border: var(--space-1) solid rgba(var(--color-teal-500-rgb), 0.4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-32);
   margin: var(--space-32) 0;
@@ -1579,18 +1561,16 @@ p:hover {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(var(--color-teal-500-rgb), 0.2), transparent);
-  animation: techScan 5s var(--ease-standard) infinite;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  animation: techScan 5s ease-in-out infinite;
   z-index: -1;
 }
 
 .market-momentum:hover {
-  transform: translateY(-var(--space-4));
-  box-shadow: var(--glow-blue), var(--shadow-lg);
-  border-color: rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.6);
-  background: 
-    linear-gradient(135deg, rgba(var(--color-teal-500-rgb), 0.12) 0%, rgba(var(--color-orange-400-rgb), 0.05) 50%, rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.12) 100%),
-    var(--color-surface);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
+  background: var(--color-surface);
 }
 
 .investor-brands {
@@ -1603,13 +1583,13 @@ p:hover {
 }
 
 .brand-validation {
-  background: rgba(var(--color-teal-500-rgb), 0.2);
+  background: var(--color-secondary);
   color: var(--color-primary);
   padding: var(--space-10) var(--space-20);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-base);
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-sm);
-  border: var(--space-1) solid rgba(var(--color-teal-500-rgb), 0.4);
+  border: 1px solid var(--color-border);
   font-family: var(--font-family-base);
   transition: all var(--duration-normal) var(--ease-standard);
   opacity: 1;
@@ -1626,44 +1606,45 @@ p:hover {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.4), transparent);
+  background: linear-gradient(90deg, transparent, var(--color-primary-hover), transparent);
   transition: left 0.6s ease;
 }
 
 .brand-validation:hover {
-  transform: scale(1.1) translateY(-var(--space-4)) rotateX(5deg);
-  background: rgba(var(--color-teal-500-rgb), 0.3);
-  border-color: rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.8);
-  color: var(--color-text);
-  box-shadow: var(--glow-blue), var(--shadow-sm);
-  animation: techGlow 1s var(--ease-standard);
+  transform: scale(1.1) translateY(-4px) rotateX(5deg);
+  background: var(--color-secondary-hover);
+  border-color: var(--color-primary);
+  color: var(--color-btn-primary-text);
+  box-shadow: var(--shadow-md);
+  animation: techGlow 1s ease-in-out;
 }
 
 .brand-validation:hover::before {
   left: 100%;
 }
 
-/* ENHANCED RENTAL & GROWTH BOXES with Tech Effects using design system */
+/* CORRECTED: RENTAL & GROWTH BOXES - BOTH USE PRIMARY THEME */
 .rental-projection-container,
 .growth-highlight-container {
   display: flex;
   justify-content: center;
-  margin: 50px 0;
+  margin: var(--space-32) 0;
   perspective: 1000px;
 }
 
 .projection-highlight,
 .growth-value-box {
-  background: var(--color-luxury-gold-enhanced);
-  color: var(--color-slate-900);
-  padding: 50px 70px;
+  /* CORRECTED: Both boxes use primary theme */
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+  padding: var(--space-32) var(--space-32);
   border-radius: var(--radius-lg);
   text-align: center;
-  box-shadow: var(--glow-gold);
+  box-shadow: var(--shadow-lg);
   backdrop-filter: blur(20px);
-  border: var(--space-2) solid rgba(var(--color-orange-400-rgb), 0.4);
+  border: 2px solid var(--color-primary);
   transition: all var(--duration-normal) var(--ease-standard);
-  animation: techFloat 5s var(--ease-standard) infinite;
+  animation: techFloat 5s ease-in-out infinite;
   position: relative;
   overflow: hidden;
   transform-style: preserve-3d;
@@ -1677,10 +1658,10 @@ p:hover {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(var(--color-teal-500-rgb), 0.1) 20%, transparent 60%);
+  background: radial-gradient(circle, var(--color-secondary) 20%, transparent 60%);
   opacity: 0;
-  transition: all 0.6s ease;
-  animation: holographic 4s var(--ease-standard) infinite;
+  transition: all var(--duration-normal) ease;
+  animation: holographic 4s ease-in-out infinite;
 }
 
 .projection-highlight::after,
@@ -1691,45 +1672,42 @@ p:hover {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(var(--color-teal-500-rgb), 0.3), transparent);
-  animation: techScan 6s var(--ease-standard) infinite;
+  background: linear-gradient(90deg, transparent, var(--color-primary-hover), transparent);
+  animation: techScan 6s ease-in-out infinite;
   z-index: -1;
 }
 
 .projection-highlight:hover,
 .growth-value-box:hover {
-  transform: translateY(-var(--space-10)) rotateX(5deg) scale(1.05);
-  box-shadow: var(--glow-gold), var(--glow-blue), var(--shadow-lg);
-  animation: techFloat 5s var(--ease-standard) infinite, techPulse 2s var(--ease-standard) infinite;
-  background: linear-gradient(135deg, var(--color-orange-400) 0%, var(--color-primary) 20%, var(--color-orange-500) 40%, var(--color-teal-400) 60%, var(--color-orange-400) 80%, var(--color-brown-600) 100%);
-  background-size: 200% 200%;
+  transform: translateY(-10px) rotateX(5deg) scale(1.05);
+  box-shadow: var(--shadow-lg);
+  animation: techFloat 5s ease-in-out infinite, techPulse 2s ease-in-out infinite;
+  background: var(--color-primary-hover);
 }
 
 .projection-highlight:hover::before,
 .growth-value-box:hover::before {
   opacity: 1;
   transform: scale(1.5);
-  animation: holographic 2s var(--ease-standard) infinite;
+  animation: holographic 2s ease-in-out infinite;
 }
 
 .projection-range,
 .growth-percentage {
   font-family: var(--font-family-base);
-  font-size: var(--font-size-4xl);
+  font-size: var(--font-size-6xl);
   font-weight: var(--font-weight-bold);
   display: block;
   margin-bottom: var(--space-16);
-  text-shadow: 0 0 var(--space-20) rgba(var(--color-orange-400-rgb), 0.4);
   letter-spacing: var(--letter-spacing-tight);
-  color: var(--color-slate-900);
+  color: var(--color-btn-primary-text);
   transition: all var(--duration-normal) ease;
 }
 
 .projection-highlight:hover .projection-range,
 .growth-value-box:hover .growth-percentage {
   transform: scale(1.1);
-  text-shadow: 0 0 var(--space-24) rgba(var(--color-teal-500-rgb), 0.6), 0 0 50px rgba(var(--color-orange-400-rgb), 0.4);
-  animation: quantumShift 1s var(--ease-standard) infinite;
+  animation: quantumShift 1s ease-in-out infinite;
 }
 
 .projection-label,
@@ -1738,7 +1716,7 @@ p:hover {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
   margin-bottom: var(--space-8);
-  color: var(--color-slate-900);
+  color: var(--color-btn-primary-text);
   transition: all var(--duration-normal) ease;
 }
 
@@ -1748,22 +1726,22 @@ p:hover {
   font-size: var(--font-size-base);
   opacity: 0.8;
   font-weight: var(--font-weight-medium);
-  color: var(--color-slate-900);
+  color: var(--color-btn-primary-text);
   transition: all var(--duration-normal) ease;
 }
 
-/* ENHANCED BUTTONS with High-Tech Effects using design system */
+/* ENHANCED BUTTONS with High-Tech Effects */
 .final-cta {
   display: flex;
   justify-content: center;
   gap: var(--space-24);
-  margin: 50px 0;
+  margin: var(--space-32) 0;
   flex-wrap: wrap;
   perspective: 1000px;
 }
 
 .cta-btn {
-  padding: var(--space-16) 45px;
+  padding: var(--space-16) var(--space-32);
   border-radius: var(--radius-full);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
@@ -1795,13 +1773,13 @@ p:hover {
 .cta-btn::after {
   content: '';
   position: absolute;
-  top: -var(--space-2);
-  left: -var(--space-2);
-  right: -var(--space-2);
-  bottom: -var(--space-2);
-  background: linear-gradient(45deg, var(--color-primary), var(--color-teal-400), var(--color-primary));
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--color-primary), var(--color-primary-hover), var(--color-primary));
   background-size: 200% 200%;
-  border-radius: calc(var(--radius-full) + var(--space-2));
+  border-radius: calc(var(--radius-full) + 2px);
   z-index: -1;
   animation: holographic 3s linear infinite;
   opacity: 0;
@@ -1809,16 +1787,16 @@ p:hover {
 }
 
 .cta-btn.primary {
-  background: var(--color-luxury-gold-enhanced);
-  color: var(--color-slate-900);
-  box-shadow: var(--glow-gold);
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+  box-shadow: var(--shadow-md);
 }
 
 .cta-btn.primary:hover {
-  background: linear-gradient(135deg, var(--color-orange-400) 0%, var(--color-primary) 50%, var(--color-orange-500) 100%);
-  transform: translateY(-var(--space-8)) rotateX(5deg) scale(1.08);
-  box-shadow: var(--glow-gold), var(--glow-blue);
-  animation: techFloat 2s var(--ease-standard) infinite;
+  background: var(--color-primary-hover);
+  transform: translateY(-8px) rotateX(5deg) scale(1.08);
+  box-shadow: var(--shadow-lg);
+  animation: techFloat 2s ease-in-out infinite;
 }
 
 .cta-btn.primary:hover::before {
@@ -1830,19 +1808,19 @@ p:hover {
 }
 
 .cta-btn.secondary {
-  background: rgba(var(--color-teal-500-rgb), 0.1);
+  background: var(--color-secondary);
   color: var(--color-text);
-  border: var(--space-2) solid rgba(var(--color-teal-500-rgb), 0.5);
+  border: 2px solid var(--color-border);
   backdrop-filter: blur(10px);
 }
 
 .cta-btn.secondary:hover {
-  background: rgba(var(--color-teal-500-rgb), 0.2);
-  border-color: rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.8);
-  color: var(--color-tech-cyan-solid);
-  transform: translateY(-var(--space-8)) rotateX(5deg) scale(1.08);
-  box-shadow: var(--glow-blue), var(--glow-cyan);
-  animation: techFloat 2s var(--ease-standard) infinite;
+  background: var(--color-secondary-hover);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-8px) rotateX(5deg) scale(1.08);
+  box-shadow: var(--shadow-md);
+  animation: techFloat 2s ease-in-out infinite;
 }
 
 .cta-btn.secondary:hover::before {
@@ -1853,12 +1831,12 @@ p:hover {
   opacity: 1;
 }
 
-/* ENHANCED NEXT BUTTON using design system */
+/* ENHANCED NEXT BUTTON */
 .next-btn {
   display: block;
-  margin: 60px auto 0;
-  padding: var(--space-16) 50px;
-  background: var(--color-tech-blue);
+  margin: var(--space-32) auto 0;
+  padding: var(--space-16) var(--space-32);
+  background: var(--color-primary);
   border: none;
   border-radius: var(--radius-full);
   color: var(--color-btn-primary-text);
@@ -1869,10 +1847,10 @@ p:hover {
   text-transform: uppercase;
   letter-spacing: 1.5px;
   font-family: var(--font-family-base);
-  box-shadow: var(--glow-blue);
+  box-shadow: var(--shadow-md);
   position: relative;
   overflow: hidden;
-  animation: techFloat 4s var(--ease-standard) infinite;
+  animation: techFloat 4s ease-in-out infinite;
 }
 
 .next-btn::before {
@@ -1882,23 +1860,115 @@ p:hover {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.5), transparent);
-  animation: techScan 3s var(--ease-standard) infinite;
+  background: linear-gradient(90deg, transparent, var(--color-primary-hover), transparent);
+  animation: techScan 3s ease-in-out infinite;
 }
 
 .next-btn:hover {
-  background: var(--color-tech-cyan);
-  transform: translateY(-var(--space-8)) scale(1.08);
-  box-shadow: var(--glow-blue), var(--glow-cyan);
-  animation: techFloat 4s var(--ease-standard) infinite, techPulse 2s var(--ease-standard) infinite;
+  background: var(--color-primary-hover);
+  transform: translateY(-8px) scale(1.08);
+  box-shadow: var(--shadow-lg);
+  animation: techFloat 4s ease-in-out infinite, techPulse 2s ease-in-out infinite;
 }
 
-/* Responsive Design using design system breakpoints */
-@media (max-width: 768px) {
-  .container {
-    padding: var(--space-16);
-  }
+/* Additional sections styling - keeping all existing styles for completeness */
 
+.rental-reality {
+  margin: var(--space-32) 0;
+}
+
+.demand-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-24);
+  margin: var(--space-24) 0;
+}
+
+.demand-item {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-24);
+  transition: all var(--duration-normal) var(--ease-standard);
+  backdrop-filter: blur(8px);
+  opacity: 1;
+  transform: none;
+}
+
+.demand-item:hover {
+  background: var(--color-surface);
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
+}
+
+.demand-title {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  margin-bottom: var(--space-10);
+  font-size: var(--font-size-lg);
+  transition: color var(--duration-fast) ease;
+}
+
+.demand-item:hover .demand-title {
+  color: var(--color-primary-hover);
+}
+
+.demand-description {
+  font-family: var(--font-family-base);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+}
+
+/* ENHANCED CHART SECTIONS */
+.chart-section {
+  margin: var(--space-32) 0;
+  text-align: center;
+}
+
+.chart-section h3 {
+  font-family: var(--font-family-base);
+  color: var(--color-primary);
+  margin-bottom: var(--space-24);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+}
+
+.chart-container {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-24);
+  border: 1px solid var(--color-border);
+  height: 450px;
+  position: relative;
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(15px);
+  transition: all var(--duration-fast) ease;
+}
+
+.chart-container:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
+}
+
+.chart-container canvas {
+  max-height: 390px !important;
+}
+
+.fdi-explanation {
+  margin-top: var(--space-20);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-base);
+  font-style: italic;
+  text-align: center;
+  font-family: var(--font-family-base);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .content-wrapper {
     padding: var(--space-32) var(--space-24);
   }
@@ -1913,7 +1983,7 @@ p:hover {
   }
   
   h1 {
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-4xl);
   }
 
   h2 {
@@ -1922,33 +1992,29 @@ p:hover {
 
   .projection-range,
   .growth-percentage {
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-5xl);
   }
   
   /* Reduce animation intensity on mobile */
   .metric-card:hover {
-    transform: translateY(-var(--space-4)) scale(1.02);
+    transform: translateY(-5px) scale(1.02);
     animation: none;
   }
   
   .cta-btn:hover, .next-btn:hover {
-    transform: translateY(-var(--space-4)) scale(1.04);
+    transform: translateY(-4px) scale(1.04);
     animation: none;
   }
   
   /* Disable complex animations on mobile */
   .projection-highlight:hover,
   .growth-value-box:hover {
-    transform: translateY(-var(--space-4)) scale(1.02);
-    animation: techFloat 5s var(--ease-standard) infinite;
+    transform: translateY(-5px) scale(1.02);
+    animation: techFloat 5s ease-in-out infinite;
   }
 }
 
 @media (max-width: 480px) {
-  .container {
-    padding: var(--space-12);
-  }
-
   .content-wrapper {
     padding: var(--space-24) var(--space-16);
   }
@@ -1962,12 +2028,12 @@ p:hover {
   .breadcrumb {
     flex-shrink: 0;
     padding: var(--space-10) var(--space-16);
-    font-size: var(--font-size-xs);
+    font-size: var(--font-size-sm);
   }
   
   .projection-highlight,
   .growth-value-box {
-    padding: var(--space-24) var(--space-32);
+    padding: var(--space-24) var(--space-20);
   }
   
   .final-cta {
@@ -1981,21 +2047,21 @@ p:hover {
   }
 
   h1 {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-3xl);
   }
 
   .projection-range,
   .growth-percentage {
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-4xl);
   }
 
   .metric-value {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-3xl);
   }
   
   /* Minimal animations on small screens */
   .metric-card:hover {
-    transform: translateY(-var(--space-2)) scale(1.01);
+    transform: translateY(-3px) scale(1.01);
     animation: none;
   }
   
@@ -2008,5 +2074,19 @@ p:hover {
   .breadcrumb:hover,
   .brand-validation:hover {
     animation: none;
+  }
+
+  .container {
+    padding: var(--space-16);
+  }
+
+  .key-metrics-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-16);
+  }
+
+  .demand-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-16);
   }
 }
