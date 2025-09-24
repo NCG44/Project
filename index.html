@@ -82,9 +82,6 @@
                     
                     <div class="hero-image-container">
                         <img src="R1.jpg" alt="Bellevue Residence ejendom" class="hero-image">
-                        <div class="image-overlay">
-                            <div class="overlay-text">Din fremtidige ejendom</div>
-                        </div>
                     </div>
                 </div>
 
@@ -96,13 +93,13 @@
         <section class="section" id="section-1">
             <div class="content-wrapper">
                 <h1>Lejeindtægtspotentiale</h1>
-                <h2>Projekterede månedlige indtægter fra 2027</h2>
+                <h2>Projekterede årlige lejeindtægter fra 2027</h2>
                 
                 <div class="rental-projection-container">
                     <div class="projection-highlight">
-                        <span class="projection-range" data-target="11">0%</span>
+                        <span class="projection-range" data-target="11.7">0%</span>
                         <div class="projection-label">Projekterede årlige lejeindtægter</div>
-                        <div class="projection-sublabel">€1.405 månedligt i gennemsnit fra 2027</div>
+                        <div class="projection-sublabel">€16.860 netto årligt fra 2027</div>
                     </div>
                 </div>
 
@@ -122,7 +119,7 @@
                                 <div class="demand-description">Få luksusboligenheder langs Adriaterhavskysten</div>
                             </div>
                             <div class="demand-item">
-                                <div class="demand-title">Stigende turisme</div>
+                                <div class="demand-title">EU-medlemskab & stigende turisme</div>
                                 <div class="demand-description">30% årlig vækst i internationale gæster</div>
                             </div>
                             <div class="demand-item">
@@ -133,13 +130,17 @@
                     </div>
                 </div>
 
+                <!-- Rental Income Chart -->
+                <div class="chart-section">
+                    <h3>Projekterede årlige lejeindtægter</h3>
+                    <div class="chart-container">
+                        <canvas id="rental-income-chart" width="800" height="400"></canvas>
+                    </div>
+                </div>
+
                 <div class="rental-image-section">
                     <div class="rental-image-container">
                         <img src="R14.jpg" alt="Luksus interior med havudsigt" class="rental-image">
-                        <div class="rental-overlay">
-                            <div class="overlay-profit">€150/nat</div>
-                            <div class="overlay-subtext">Booking.com markedspris</div>
-                        </div>
                     </div>
                 </div>
 
@@ -165,8 +166,8 @@
                     <h3>Værditilvækst katalysatorer</h3>
                     <div class="catalyst-timeline">
                         <div class="catalyst-item imminent">
-                            <div class="catalyst-year">2026-2027</div>
-                            <div class="catalyst-title">Byggeriets færdiggørelse</div>
+                            <div class="catalyst-year">Q1 2027</div>
+                            <div class="catalyst-title">Projektets færdiggørelse</div>
                             <div class="catalyst-impact">Overgang fra off-plan til færdig ejendom</div>
                         </div>
                         <div class="catalyst-item major">
@@ -177,7 +178,7 @@
                         <div class="catalyst-item ongoing">
                             <div class="catalyst-year">Kontinuerligt</div>
                             <div class="catalyst-title">Infrastrukturudvikling</div>
-                            <div class="catalyst-impact">€500M+ i vej- og lufthavnsprojekter</div>
+                            <div class="catalyst-impact">€500M+ i havneprojekter og motorveje</div>
                         </div>
                     </div>
                 </div>
@@ -188,13 +189,17 @@
                     <p><em>Montenegro følger samme udviklingsspor, og vi positionerer os tidligt i denne proces.</em></p>
                 </div>
 
+                <!-- Value Growth Chart -->
+                <div class="chart-section">
+                    <h3>Forventet værditilvækst over tid</h3>
+                    <div class="chart-container">
+                        <canvas id="growth-timeline-chart" width="800" height="400"></canvas>
+                    </div>
+                </div>
+
                 <div class="growth-visualization">
                     <div class="growth-image-container">
                         <img src="R8.jpg" alt="Bellevue byggeprogres" class="growth-image">
-                        <div class="progress-overlay">
-                            <div class="progress-text">Under opførelse</div>
-                            <div class="progress-subtext">Færdiggørelse 2027</div>
-                        </div>
                     </div>
                 </div>
 
@@ -248,18 +253,30 @@
 
                 <div class="risk-mitigation">
                     <h3>Risikominimering</h3>
+                    
+                    <!-- Project Progress Box -->
+                    <div class="project-progress-box">
+                        <div class="progress-header">
+                            <h4>Projektet 50% færdiggjort</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-progress="50"></div>
+                            </div>
+                        </div>
+                        <p>Med halvdelen af byggeprojektet allerede gennemført reduceres risikoen betydeligt. Fundamenter, struktur og første fase er implementeret, hvilket giver konkret sikkerhed for færdiggørelse og eliminerer de største usikkerheder ved byggeprojekter.</p>
+                    </div>
+
                     <div class="risk-grid">
                         <div class="risk-item">
                             <div class="risk-title">Rentefri betalingsplan</div>
                             <div class="risk-description">Spred købet over byggeprioden uden finansieringsomkostninger</div>
                         </div>
                         <div class="risk-item">
-                            <div class="risk-title">Byggegarantier</div>
-                            <div class="risk-description">Fuld færdiggørelsesgaranti fra etableret udvikler</div>
+                            <div class="risk-title">Høj efterspørgsel</div>
+                            <div class="risk-description">Stærk markedsefterspørgsel efter luksusboligenheder ved kysten</div>
                         </div>
                         <div class="risk-item">
-                            <div class="risk-title">Tidlig exit-mulighed</div>
-                            <div class="risk-description">Mulighed for videresalg af kontrakt før færdiggørelse</div>
+                            <div class="risk-title">Eksklusiv 5-stjernet standard</div>
+                            <div class="risk-description">Næsten ingen konkurrerende 5-stjernet projekter i Montenegro</div>
                         </div>
                     </div>
                 </div>
@@ -279,7 +296,7 @@
                         <div class="old-market">
                             <h3>Côte d'Azur - mættet marked</h3>
                             <div class="market-problems">
-                                <div class="problem-item">Overprissætning (€8.000+ pr. m²)</div>
+                                <div class="problem-item">Overprissætning (€8.000+ enheder)</div>
                                 <div class="problem-item">Overturisme</div>
                                 <div class="problem-item">Begrænsede lejeindtægtsmuligheder</div>
                                 <div class="problem-item">Høje skatter og omkostninger</div>
@@ -291,7 +308,7 @@
                         <div class="new-market">
                             <h3>Montenegro - emerging marked</h3>
                             <div class="market-advantages">
-                                <div class="advantage-item">Undervurderet (€3.000-4.000 pr. m²)</div>
+                                <div class="advantage-item">Undervurderet (€148.000 enheder)</div>
                                 <div class="advantage-item">Uberørt kystlinje</div>
                                 <div class="advantage-item">Attraktive lejeindtægtsmuligheder (11,7%)</div>
                                 <div class="advantage-item">Favorable skatteregler</div>
@@ -301,7 +318,7 @@
                 </div>
 
                 <div class="validation-proof">
-                    <h3>Markedsvalidering fra luksusbrands</h3>
+                    <h3>Markedsvalidering fra luksusbrands og FDI</h3>
                     <div class="brand-investments">
                         <div class="brand-case">
                             <div class="brand-name">Marriott</div>
@@ -319,15 +336,20 @@
                             <div class="investment-signal">Signal: Langsigtet tillid til vækst</div>
                         </div>
                     </div>
+
+                    <!-- FDI Chart -->
+                    <div class="chart-section">
+                        <h3>Udenlandske direkte investeringer (FDI) i Montenegro</h3>
+                        <div class="chart-container">
+                            <canvas id="fdi-chart" width="800" height="400"></canvas>
+                        </div>
+                        <p class="fdi-explanation">Stigende FDI signalerer international tillid til Montenegro's økonomiske potentiale og stabilitet, hvilket understøtter værditilvækst i ejendomssektoren.</p>
+                    </div>
                 </div>
 
                 <div class="positioning-image">
                     <div class="position-image-container">
                         <img src="R12.jpg" alt="Bellevue luksusstandard" class="position-image">
-                        <div class="position-overlay">
-                            <div class="overlay-text">Luksusstandard</div>
-                            <div class="overlay-subtext">Marriott-niveau kvalitet</div>
-                        </div>
                     </div>
                 </div>
 
@@ -344,9 +366,9 @@
                 <div class="investment-summary">
                     <div class="summary-grid">
                         <div class="summary-card income-focus">
-                            <h3>Projekterede månedlige indtægter</h3>
-                            <div class="summary-value">€1.405</div>
-                            <div class="summary-description">Gennemsnitlig månedlig netto fra 2027</div>
+                            <h3>Projekterede årlige lejeindtægter</h3>
+                            <div class="summary-value">€16.860</div>
+                            <div class="summary-description">Gennemsnitlig årlig netto fra 2027</div>
                         </div>
                         
                         <div class="summary-card growth-focus">
@@ -388,10 +410,6 @@
                 <div class="final-opportunity-image">
                     <div class="opportunity-image-container">
                         <img src="R4.jpg" alt="Bellevue værditilvækst og lejeindtægter" class="opportunity-image">
-                        <div class="opportunity-overlay">
-                            <div class="overlay-main">Din fremtidige ejendom</div>
-                            <div class="overlay-returns">11,7% årligt + 66,3% værditilvækst</div>
-                        </div>
                     </div>
                 </div>
 
@@ -403,10 +421,10 @@
                     
                     <div class="status-content">
                         <div class="status-item completed">
-                            <div class="status-icon completed">Færdig</div>
+                            <div class="status-icon completed">50% færdig</div>
                             <div class="status-details">
-                                <h4>Fundamenter støbt</h4>
-                                <p>Byggeprojektet er officielt påbegyndt</p>
+                                <h4>Projekt halvvejs færdiggjort</h4>
+                                <p>Fundamenter, struktur og første bygningsfase gennemført</p>
                             </div>
                         </div>
                         
@@ -434,22 +452,27 @@
                         <div class="action-step">
                             <div class="step-number">1</div>
                             <div class="step-content">
-                                <h4>Enheds reservering</h4>
-                                <p>Vælg din foretrukne enhed og etage</p>
+                                <h4>Reservér enhed</h4>
+                                <p>Vælg din foretrukne enhed og beliggenhed</p>
                             </div>
                         </div>
                         <div class="action-step">
                             <div class="step-number">2</div>
                             <div class="step-content">
-                                <h4>Transaktionsanalyse</h4>
-                                <p>Detaljeret gennemgang af potentiale</p>
+                                <h4>Underskriv kontrakt</h4>
+                                <p>Juridisk gennemgang og kontraktunderskrift</p>
                             </div>
                         </div>
-                        <div class="action-step">
+                        <div class="action-step payment-step">
                             <div class="step-number">3</div>
                             <div class="step-content">
-                                <h4>Off-plan kontrakt</h4>
-                                <p>Sikr nuværende prissætning</p>
+                                <h4>Betalingsplan</h4>
+                                <div class="payment-schedule">
+                                    <div class="payment-item">1. rate: 50% ved kontrakt</div>
+                                    <div class="payment-item">2. rate: 20% december 2025</div>
+                                    <div class="payment-item">3. rate: 20% juli 2026</div>
+                                    <div class="payment-item">Sidste rate: 10% ved færdiggørelse januar 2027</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -458,6 +481,12 @@
                 <div class="final-cta">
                     <button class="cta-btn primary">Reservér enhed nu</button>
                     <button class="cta-btn secondary">Book transaktionsanalyse</button>
+                </div>
+
+                <!-- New Action Buttons -->
+                <div class="action-buttons">
+                    <button class="action-btn book-meeting">Book møde</button>
+                    <button class="action-btn download-brochure">Brochure</button>
                 </div>
             </div>
         </section>
