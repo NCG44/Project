@@ -1,6 +1,6 @@
-// Bellevue Residence Ejendomsapp - Professionel Interface med Transaktionsanalyse Data
+// Bellevue Residence ejendomsapp - professionel interface med transaktionsanalyse data
 document.addEventListener('DOMContentLoaded', function() {
-    // Real Transaction Analysis data fra Norden Capital Group
+    // Real transaction analysis data fra Norden Capital Group
     const data = {
         transaction_analysis: {
             purchase_amount: 148000,
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
         animatableElements.forEach(el => observer.observe(el));
     }
 
-    // Animation Funktioner
+    // Animation funktioner
     function animateNumber(element, target, duration = 2000, suffix = '', prefix = '', decimals = 0) {
         if (!element || element.classList.contains('animated')) return;
         element.classList.add('animated');
@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Chart Oprettelse Funktioner
+    // Chart oprettelse funktioner
     function createRentalIncomeChart() {
         const canvas = document.getElementById('rental-income-chart');
         if (!canvas) return;
@@ -329,7 +329,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 labels: data.rental_projections.months,
                 datasets: [
                     {
-                        label: 'Månedlige lejeindtægter (€) - Fra 2027',
+                        label: 'Projekterede månedlige lejeindtægter (€) - fra 2027',
                         data: data.rental_projections.monthly_income,
                         borderColor: '#d4af37',
                         backgroundColor: 'rgba(212, 175, 55, 0.1)',
@@ -385,7 +385,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 labels: data.growth_timeline.years,
                 datasets: [
                     {
-                        label: 'Årlige lejeindtægter (€) - Fra 2027',
+                        label: 'Projekterede årlige lejeindtægter (€) - fra 2027',
                         data: data.growth_timeline.annual_cashflow,
                         backgroundColor: 'rgba(22, 160, 133, 0.8)',
                         borderColor: '#16a085',
@@ -393,7 +393,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         borderRadius: 8
                     },
                     {
-                        label: 'Kapitalvækst (€) - Over 3 år',
+                        label: 'Forventet kapitalvækst (€) - over 3 år',
                         data: [0, 0, data.transaction_analysis.capital_appreciation],
                         backgroundColor: 'rgba(212, 175, 55, 0.8)',
                         borderColor: '#d4af37',
@@ -437,17 +437,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Dialog Funktioner for CTA Handlinger
+    // Dialog funktioner for CTA handlinger
     function showPropertyDialog() {
         console.log('Åbner ejendoms reservering dialog...');
         const dialog = createStyledDialog(
-            'Reservér Din Enhed',
+            'Reservér din enhed',
             `
             <div style="text-align: center; padding: 20px;">
-                <div style="font-size: 48px; color: #d4af37; margin-bottom: 20px;">EJENDOM</div>
+                <div style="font-size: 48px; color: #d4af37; margin-bottom: 20px;">Ejendom</div>
                 <h3 style="color: #d4af37; margin-bottom: 15px;">Tak for din interesse i Bellevue Residence!</h3>
                 <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px; line-height: 1.6;">
-                    Du er ved at træffe en klog beslutning med 11,7% årlige lejeindtægter og 66,3% værditilvækst over 3 år.
+                    Du overvejer en klog beslutning med projekterede 11,7% årlige lejeindtægter og 66,3% forventet værditilvækst over 3 år.
                 </p>
                 <div style="background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; padding: 20px; margin: 20px 0;">
                     <p style="color: #d4af37; font-weight: bold; margin-bottom: 10px;">Næste skridt:</p>
@@ -455,7 +455,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         • Enheds-visning og beliggenhedsvalg<br>
                         • Finansieringsstruktur og betalingsplan<br>
                         • Juridisk gennemgang og dokumentation<br>
-                        • Lejeindtægter starter fra 2027 (byggets færdiggørelse)
+                        • Projekterede lejeindtægter starter fra 2027
                     </p>
                 </div>
                 <button onclick="closeDialog()" style="background: #d4af37; color: #000; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; text-transform: uppercase;">
@@ -471,22 +471,22 @@ document.addEventListener('DOMContentLoaded', function() {
     function showConsultationDialog() {
         console.log('Åbner konsultation booking dialog...');
         const dialog = createStyledDialog(
-            'Book Transaktionsanalyse',
+            'Book transaktionsanalyse',
             `
             <div style="text-align: center; padding: 20px;">
-                <div style="font-size: 48px; color: #16a085; margin-bottom: 20px;">KONSULTATION</div>
-                <h3 style="color: #16a085; margin-bottom: 15px;">Book Personlig Transaktionsanalyse</h3>
+                <div style="font-size: 48px; color: #16a085; margin-bottom: 20px;">Konsultation</div>
+                <h3 style="color: #16a085; margin-bottom: 15px;">Book personlig transaktionsanalyse</h3>
                 <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px; line-height: 1.6;">
                     Lad vores eksperter guide dig gennem den detaljerede transaktionsanalyse for Bellevue Residence med verificerede beregninger.
                 </p>
                 <div style="background: rgba(22, 160, 133, 0.1); border: 1px solid rgba(22, 160, 133, 0.3); border-radius: 12px; padding: 20px; margin: 20px 0;">
                     <p style="color: #16a085; font-weight: bold; margin-bottom: 10px;">Transaktionsanalysen inkluderer:</p>
                     <p style="color: rgba(255,255,255,0.8); font-size: 14px;">
-                        • Detaljeret gennemgang af 11,7% årlige lejeindtægter<br>
-                        • 66,3% værditilvækst beregning over 3 år<br>
+                        • Detaljeret gennemgang af projekterede 11,7% årlige lejeindtægter<br>
+                        • 66,3% forventet værditilvækst beregning over 3 år<br>
                         • Risikoevaluering og mitigering<br>
                         • Skræddersyet ejendomsstrategi<br>
-                        • Timeline: Lejeindtægter fra 2027
+                        • Timeline: Projekterede lejeindtægter fra 2027
                     </p>
                 </div>
                 <button onclick="closeDialog()" style="background: #16a085; color: #fff; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; text-transform: uppercase;">
@@ -621,5 +621,5 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(style);
 
-    console.log('Bellevue Residence app indlæst med ægte Transaktionsanalyse data og professionel dansk');
+    console.log('Bellevue Residence app indlæst med korrekt dansk og transaktionsanalyse data');
 });
