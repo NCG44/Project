@@ -1,9 +1,9 @@
-// Bellevue Residence Investment App - Professional Interface with Transaction Analysis Data
+// Bellevue Residence Ejendomsapp - Professionel Interface med Transaktionsanalyse Data
 document.addEventListener('DOMContentLoaded', function() {
-    // Real Transaction Analysis data from Norden Capital Group
+    // Real Transaction Analysis data fra Norden Capital Group
     const data = {
         transaction_analysis: {
-            investment_amount: 148000,
+            purchase_amount: 148000,
             nightly_rate: 150,
             occupied_nights: 146,
             gross_rental_income: 21900,
@@ -15,11 +15,12 @@ document.addEventListener('DOMContentLoaded', function() {
             three_year_cashflow: 50580,
             total_return: 94913,
             total_return_percentage: 66.3,
-            occupancy_rate: 40 // Conservative 40% occupancy
+            occupancy_rate: 40, // Konservativ 40% belægning
+            completion_year: 2027 // Forventet færdiggørelse
         },
         rental_projections: {
-            months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            monthly_income: [1205, 1205, 1205, 1680, 2100, 2520, 2520, 2520, 2100, 1680, 1260, 1205] // Based on seasonal variation
+            months: ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'],
+            monthly_income: [1205, 1205, 1205, 1680, 2100, 2520, 2520, 2520, 2100, 1680, 1260, 1205] // Baseret på sæsonvariation
         },
         growth_timeline: {
             years: ['År 1', 'År 2', 'År 3'],
@@ -34,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalSections = 6;
     let activeCharts = {};
 
-    // Initialize app
+    // Initialiser app
     setTimeout(() => {
         setupNavigation();
         showSection(0);
@@ -42,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100);
 
     function setupNavigation() {
-        console.log('Setting up Bellevue Residence navigation...');
+        console.log('Opsætter Bellevue Residence navigation...');
         
         // Breadcrumb navigation
         const breadcrumbs = document.querySelectorAll('.breadcrumb');
@@ -61,10 +62,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                // Handle CTA buttons differently
+                // Håndter CTA buttons anderledes
                 if (button.classList.contains('cta-btn')) {
                     if (button.classList.contains('primary')) {
-                        showInvestmentDialog();
+                        showPropertyDialog();
                     } else {
                         showConsultationDialog();
                     }
@@ -74,15 +75,15 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        console.log('Navigation setup complete');
+        console.log('Navigation setup fuldført');
     }
 
     function showSection(index) {
-        console.log(`Showing Bellevue section ${index}`);
+        console.log(`Viser Bellevue sektion ${index}`);
         
         if (index < 0 || index >= totalSections) return;
 
-        // Clear existing charts
+        // Ryd eksisterende charts
         Object.values(activeCharts).forEach(chart => {
             if (chart && typeof chart.destroy === 'function') {
                 chart.destroy();
@@ -90,21 +91,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         activeCharts = {};
 
-        // Hide all sections
+        // Skjul alle sektioner
         const allSections = document.querySelectorAll('.section');
         allSections.forEach(section => {
             section.classList.remove('active');
             section.style.display = 'none';
         });
 
-        // Show target section
+        // Vis målsektion
         const targetSection = document.getElementById(`section-${index}`);
         if (targetSection) {
             targetSection.style.display = 'block';
             targetSection.classList.add('active');
         }
 
-        // Update breadcrumbs
+        // Opdater breadcrumbs
         const breadcrumbs = document.querySelectorAll('.breadcrumb');
         breadcrumbs.forEach((crumb, i) => {
             crumb.classList.remove('active', 'completed');
@@ -117,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         currentSection = index;
 
-        // Initialize section-specific content
+        // Initialiser sektion-specifikt indhold
         setTimeout(() => {
             initializeSection(index);
         }, 300);
@@ -126,39 +127,39 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function initializeSection(index) {
-        console.log(`Initializing Bellevue section ${index}`);
+        console.log(`Initialiserer Bellevue sektion ${index}`);
         
         switch (index) {
-            case 0: // Hero section
+            case 0: // Hero sektion
                 setTimeout(() => {
                     animateMetricCards();
                     animateBrandTags();
                 }, 500);
                 break;
-            case 1: // Rental income section
+            case 1: // Lejeindtægt sektion
                 setTimeout(() => {
                     animateRentalProjection();
                     createRentalIncomeChart();
                 }, 500);
                 break;
-            case 2: // Growth projections
+            case 2: // Værditilvækst projektioner
                 setTimeout(() => {
                     animateGrowthPercentage();
                     createGrowthTimelineChart();
                 }, 500);
                 break;
-            case 3: // Off-plan strategy
+            case 3: // Off-plan strategi
                 setTimeout(() => {
                     animateOffPlanBenefits();
                 }, 500);
                 break;
-            case 4: // Luxury positioning
+            case 4: // Luksus positionering
                 setTimeout(() => {
                     animateBrandShowcase();
                     animateDestinationShift();
                 }, 500);
                 break;
-            case 5: // Investment summary
+            case 5: // Ejendomsmulighed sammenfatning
                 setTimeout(() => {
                     animateSummaryCards();
                     animateStatusItems();
@@ -168,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function initializeAnimations() {
-        // Add intersection observer for scroll-triggered animations
+        // Tilføj intersection observer for scroll-udløste animationer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -177,14 +178,14 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }, { threshold: 0.1 });
 
-        // Observe all animatable elements
+        // Observer alle animerbare elementer
         const animatableElements = document.querySelectorAll(
             '.metric-card, .advantage-item, .driver-card, .positioning-item, .summary-card, .step-card'
         );
         animatableElements.forEach(el => observer.observe(el));
     }
 
-    // Animation Functions
+    // Animation Funktioner
     function animateNumber(element, target, duration = 2000, suffix = '', prefix = '', decimals = 0) {
         if (!element || element.classList.contains('animated')) return;
         element.classList.add('animated');
@@ -212,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 card.style.transform = 'translateY(0)';
                 card.style.opacity = '1';
                 
-                // Animate the metric values
+                // Animer metric værdierne
                 const value = card.querySelector('.metric-value');
                 if (value && value.textContent.includes('%')) {
                     const target = parseFloat(value.textContent) || 0;
@@ -275,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, index * 600);
         });
         
-        // Animate arrow
+        // Animer pil
         const arrow = document.querySelector('.market-transition .market-arrow');
         if (arrow) {
             setTimeout(() => {
@@ -292,13 +293,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 card.style.transform = 'translateY(0)';
                 card.style.opacity = '1';
                 
-                // Animate values in summary cards
+                // Animer værdier i summary cards
                 const value = card.querySelector('.summary-value');
                 if (value) {
                     const text = value.textContent;
                     if (text.includes('%')) {
                         const target = parseFloat(text) || 0;
-                        animateNumber(value, target, 2000, '% årligt', '', 1);
+                        animateNumber(value, target, 2000, '% over 3 år', '', 1);
                     }
                 }
             }, index * 400);
@@ -315,12 +316,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Chart Creation Functions
+    // Chart Oprettelse Funktioner
     function createRentalIncomeChart() {
         const canvas = document.getElementById('rental-income-chart');
         if (!canvas) return;
 
-        console.log('Creating rental income chart with transaction analysis data');
+        console.log('Opretter lejeindtægt chart med transaktionsanalyse data');
 
         activeCharts.rental = new Chart(canvas, {
             type: 'line',
@@ -328,7 +329,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 labels: data.rental_projections.months,
                 datasets: [
                     {
-                        label: 'Månedlig lejeindtægt (€)',
+                        label: 'Månedlige lejeindtægter (€) - Fra 2027',
                         data: data.rental_projections.monthly_income,
                         borderColor: '#d4af37',
                         backgroundColor: 'rgba(212, 175, 55, 0.1)',
@@ -376,7 +377,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const canvas = document.getElementById('growth-timeline-chart');
         if (!canvas) return;
 
-        console.log('Creating growth timeline chart with transaction analysis data');
+        console.log('Opretter værditilvækst timeline chart med transaktionsanalyse data');
 
         activeCharts.growth = new Chart(canvas, {
             type: 'bar',
@@ -384,7 +385,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 labels: data.growth_timeline.years,
                 datasets: [
                     {
-                        label: 'Årlig cashflow (€)',
+                        label: 'Årlige lejeindtægter (€) - Fra 2027',
                         data: data.growth_timeline.annual_cashflow,
                         backgroundColor: 'rgba(22, 160, 133, 0.8)',
                         borderColor: '#16a085',
@@ -392,7 +393,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         borderRadius: 8
                     },
                     {
-                        label: 'Kapitalvækst (€)',
+                        label: 'Kapitalvækst (€) - Over 3 år',
                         data: [0, 0, data.transaction_analysis.capital_appreciation],
                         backgroundColor: 'rgba(212, 175, 55, 0.8)',
                         borderColor: '#d4af37',
@@ -436,24 +437,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Dialog Functions for CTA Actions
-    function showInvestmentDialog() {
-        console.log('Opening investment reservation dialog...');
+    // Dialog Funktioner for CTA Handlinger
+    function showPropertyDialog() {
+        console.log('Åbner ejendoms reservering dialog...');
         const dialog = createStyledDialog(
             'Reservér Din Enhed',
             `
             <div style="text-align: center; padding: 20px;">
-                <div style="font-size: 48px; color: #d4af37; margin-bottom: 20px;">INVESTERING</div>
+                <div style="font-size: 48px; color: #d4af37; margin-bottom: 20px;">EJENDOM</div>
                 <h3 style="color: #d4af37; margin-bottom: 15px;">Tak for din interesse i Bellevue Residence!</h3>
                 <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px; line-height: 1.6;">
-                    Du er ved at træffe en klog investeringsbeslutning med 11,7% årlig afkast og 66,3% total afkast over 3 år.
+                    Du er ved at træffe en klog beslutning med 11,7% årlige lejeindtægter og 66,3% værditilvækst over 3 år.
                 </p>
                 <div style="background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; padding: 20px; margin: 20px 0;">
                     <p style="color: #d4af37; font-weight: bold; margin-bottom: 10px;">Næste skridt:</p>
                     <p style="color: rgba(255,255,255,0.8); font-size: 14px;">
                         • Enheds-visning og beliggenhedsvalg<br>
                         • Finansieringsstruktur og betalingsplan<br>
-                        • Juridisk gennemgang og dokumentation
+                        • Juridisk gennemgang og dokumentation<br>
+                        • Lejeindtægter starter fra 2027 (byggets færdiggørelse)
                     </p>
                 </div>
                 <button onclick="closeDialog()" style="background: #d4af37; color: #000; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; text-transform: uppercase;">
@@ -463,11 +465,11 @@ document.addEventListener('DOMContentLoaded', function() {
             `
         );
         
-        console.log('Investment intent tracked for Bellevue Residence');
+        console.log('Ejendoms interesse registreret for Bellevue Residence');
     }
 
     function showConsultationDialog() {
-        console.log('Opening consultation booking dialog...');
+        console.log('Åbner konsultation booking dialog...');
         const dialog = createStyledDialog(
             'Book Transaktionsanalyse',
             `
@@ -475,15 +477,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div style="font-size: 48px; color: #16a085; margin-bottom: 20px;">KONSULTATION</div>
                 <h3 style="color: #16a085; margin-bottom: 15px;">Book Personlig Transaktionsanalyse</h3>
                 <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px; line-height: 1.6;">
-                    Lad vores eksperter guide dig gennem den detaljerede transaktionsanalyse for Bellevue Residence med verificerede ROI-beregninger.
+                    Lad vores eksperter guide dig gennem den detaljerede transaktionsanalyse for Bellevue Residence med verificerede beregninger.
                 </p>
                 <div style="background: rgba(22, 160, 133, 0.1); border: 1px solid rgba(22, 160, 133, 0.3); border-radius: 12px; padding: 20px; margin: 20px 0;">
                     <p style="color: #16a085; font-weight: bold; margin-bottom: 10px;">Transaktionsanalysen inkluderer:</p>
                     <p style="color: rgba(255,255,255,0.8); font-size: 14px;">
-                        • Detaljeret gennemgang af 11,7% årlig afkast<br>
-                        • 66,3% total afkast beregning over 3 år<br>
+                        • Detaljeret gennemgang af 11,7% årlige lejeindtægter<br>
+                        • 66,3% værditilvækst beregning over 3 år<br>
                         • Risikoevaluering og mitigering<br>
-                        • Skræddersyet investeringsstrategi
+                        • Skræddersyet ejendomsstrategi<br>
+                        • Timeline: Lejeindtægter fra 2027
                     </p>
                 </div>
                 <button onclick="closeDialog()" style="background: #16a085; color: #fff; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; text-transform: uppercase;">
@@ -537,7 +540,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
         
-        // Close on background click
+        // Luk på baggrund klik
         dialog.addEventListener('click', function(e) {
             if (e.target === dialog) {
                 closeDialog();
@@ -546,7 +549,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         document.body.appendChild(dialog);
         
-        // Make closeDialog globally accessible
+        // Gør closeDialog globalt tilgængelig
         window.closeDialog = function() {
             document.body.removeChild(dialog);
         };
@@ -565,7 +568,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Initialize scroll-triggered animations
+    // Initialiser scroll-udløste animationer
     const style = document.createElement('style');
     style.textContent = `
         .metric-card, .advantage-item, .driver-card, .positioning-item, .summary-card, .step-card {
@@ -618,5 +621,5 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(style);
 
-    console.log('Bellevue Residence app loaded with real Transaction Analysis data and professional design');
+    console.log('Bellevue Residence app indlæst med ægte Transaktionsanalyse data og professionel dansk');
 });
