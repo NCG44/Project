@@ -1,9 +1,9 @@
-// Bellevue Residence ejendomsapp - final version med FDI chart og opdateret betalingsplan
+// Bellevue Residence ejendomsapp - revised with corrected charts and pricing
 document.addEventListener('DOMContentLoaded', function() {
-    // Real transaction analysis data fra Norden Capital Group
+    // Updated transaction analysis data with corrected capital appreciation pattern
     const data = {
         transaction_analysis: {
-            purchase_amount: 148000,
+            purchase_amount: 143000,
             nightly_rate: 150,
             occupied_nights: 146,
             gross_rental_income: 21900,
@@ -15,23 +15,25 @@ document.addEventListener('DOMContentLoaded', function() {
             three_year_cashflow: 50580,
             total_return: 94913,
             total_return_percentage: 66.3,
-            occupancy_rate: 40, // Konservativ 40% belægning
-            completion_year: 2027 // Forventet færdiggørelse Q1 2027
+            occupancy_rate: 40,
+            completion_year: 2027
         },
+        // Updated rental projections with monthly data for line chart
         rental_projections: {
-            years: ['2027', '2028', '2029', '2030'],
-            annual_income: [16860, 16860, 16860, 16860]
+            months: ['Jan 2027', 'Feb 2027', 'Mar 2027', 'Apr 2027', 'Maj 2027', 'Jun 2027', 
+                    'Jul 2027', 'Aug 2027', 'Sep 2027', 'Okt 2027', 'Nov 2027', 'Dec 2027'],
+            monthly_income: [1405, 1405, 1405, 1405, 1405, 1405, 1405, 1405, 1405, 1405, 1405, 1405]
         },
+        // Corrected growth timeline - NO capital appreciation until Q1 2027, then 31% immediate jump
         growth_timeline: {
-            years: ['År 1', 'År 2', 'År 3'],
-            annual_cashflow: [16860, 16860, 16860],
-            cumulative_cashflow: [16860, 33720, 50580],
-            capital_appreciation: [0, 22000, 44333],
-            total_value: [16860, 55720, 94913]
+            periods: ['Køb (2025)', 'Off-plan (2026)', 'Færdiggørelse Q1 2027', 'År 2 (2028)', 'År 3 (2029)'],
+            property_value: [143000, 143000, 187333, 187333, 238333], // 31% jump at completion, then flat until EU
+            annual_rental_income: [0, 0, 16860, 16860, 16860], // No rental income until completion
+            cumulative_rental: [0, 0, 16860, 33720, 50580]
         },
         fdi_data: {
             years: ['2019', '2020', '2021', '2022', '2023', '2024'],
-            fdi_amounts: [487, 356, 625, 758, 892, 1050] // Millioner EUR
+            fdi_amounts: [487, 356, 625, 758, 892, 1050]
         }
     };
 
@@ -61,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Next button navigation
-        const nextButtons = document.querySelectorAll('.next-btn, .cta-btn, .action-btn');
+        const nextButtons = document.querySelectorAll('.next-btn, .cta-btn');
         nextButtons.forEach((button) => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -70,14 +72,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Håndter forskellige button typer
                 if (button.classList.contains('cta-btn')) {
                     if (button.classList.contains('primary')) {
-                        showPropertyDialog();
+                        showContactDialog();
                     } else {
-                        showConsultationDialog();
+                        showBrochureDialog();
                     }
-                } else if (button.classList.contains('book-meeting')) {
-                    showMeetingDialog();
-                } else if (button.classList.contains('download-brochure')) {
-                    showBrochureDialog();
                 } else if (currentSection < totalSections - 1) {
                     showSection(currentSection + 1);
                 }
@@ -148,13 +146,13 @@ document.addEventListener('DOMContentLoaded', function() {
             case 1: // Lejeindtægt sektion
                 setTimeout(() => {
                     animateRentalProjection();
-                    createRentalIncomeChart();
+                    createRentalIncomeLineChart();
                 }, 500);
                 break;
             case 2: // Værditilvækst projektioner
                 setTimeout(() => {
                     animateGrowthPercentage();
-                    createGrowthTimelineChart();
+                    createCorrectedGrowthChart();
                 }, 500);
                 break;
             case 3: // Off-plan strategi
@@ -343,26 +341,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Chart oprettelse funktioner
-    function createRentalIncomeChart() {
+    // NEW: Chart oprettelse funktioner med korrekte data
+
+    function createRentalIncomeLineChart() {
         const canvas = document.getElementById('rental-income-chart');
         if (!canvas) return;
 
-        console.log('Opretter årlige lejeindtægt chart');
+        console.log('Opretter månedlige lejeindtægt line chart');
 
         activeCharts.rental = new Chart(canvas, {
-            type: 'bar',
+            type: 'line',
             data: {
-                labels: data.rental_projections.years,
+                labels: data.rental_projections.months,
                 datasets: [
                     {
-                        label: 'Projekterede årlige lejeindtægter (€)',
-                        data: data.rental_projections.annual_income,
-                        backgroundColor: 'rgba(212, 175, 55, 0.8)',
+                        label: 'Månedlige lejeindtægter (€)',
+                        data: data.rental_projections.monthly_income,
                         borderColor: '#d4af37',
-                        borderWidth: 2,
-                        borderRadius: 8,
-                        borderSkipped: false,
+                        backgroundColor: 'rgba(212, 175, 55, 0.1)',
+                        borderWidth: 4,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#d4af37',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 3,
+                        pointRadius: 6,
+                        pointHoverRadius: 8
                     }
                 ]
             },
@@ -411,49 +415,46 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 },
                 animation: {
-                    duration: 2000,
-                    easing: 'easeOutBounce',
-                    delay: function(context) {
-                        return context.dataIndex * 300;
-                    }
+                    duration: 2500,
+                    easing: 'easeOutQuart'
                 }
             }
         });
     }
 
-    function createGrowthTimelineChart() {
+    function createCorrectedGrowthChart() {
         const canvas = document.getElementById('growth-timeline-chart');
         if (!canvas) return;
 
-        console.log('Opretter værditilvækst timeline chart');
+        console.log('Opretter korrekt værditilvækst chart');
 
         activeCharts.growth = new Chart(canvas, {
             type: 'line',
             data: {
-                labels: data.growth_timeline.years,
+                labels: data.growth_timeline.periods,
                 datasets: [
                     {
-                        label: 'Årlige lejeindtægter (€)',
-                        data: data.growth_timeline.annual_cashflow,
+                        label: 'Ejendomsværdi (€)',
+                        data: data.growth_timeline.property_value,
+                        borderColor: '#d4af37',
+                        backgroundColor: 'rgba(212, 175, 55, 0.1)',
+                        borderWidth: 4,
+                        fill: true,
+                        tension: 0.2, // Less smooth to show the jump
+                        pointBackgroundColor: '#d4af37',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 3,
+                        pointRadius: 8
+                    },
+                    {
+                        label: 'Akkumulerede lejeindtægter (€)',
+                        data: data.growth_timeline.cumulative_rental,
                         borderColor: '#16a085',
                         backgroundColor: 'rgba(22, 160, 133, 0.1)',
                         borderWidth: 3,
-                        fill: true,
-                        tension: 0.4,
-                        pointBackgroundColor: '#16a085',
-                        pointBorderColor: '#ffffff',
-                        pointBorderWidth: 2,
-                        pointRadius: 6
-                    },
-                    {
-                        label: 'Akkumuleret kapitalvækst (€)',
-                        data: data.growth_timeline.capital_appreciation,
-                        borderColor: '#d4af37',
-                        backgroundColor: 'rgba(212, 175, 55, 0.1)',
-                        borderWidth: 3,
                         fill: false,
                         tension: 0.4,
-                        pointBackgroundColor: '#d4af37',
+                        pointBackgroundColor: '#16a085',
                         pointBorderColor: '#ffffff',
                         pointBorderWidth: 2,
                         pointRadius: 6
@@ -590,25 +591,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Dialog funktioner
-    function showPropertyDialog() {
-        console.log('Åbner ejendoms reservering dialog...');
+    // Updated dialog functions
+    function showContactDialog() {
+        console.log('Åbner kontakt dialog...');
         const dialog = createStyledDialog(
-            'Reservér din enhed',
+            'Kontakt os',
             `
             <div style="text-align: center; padding: 20px;">
-                <div style="font-size: 48px; color: #d4af37; margin-bottom: 20px;">Ejendom</div>
-                <h3 style="color: #d4af37; margin-bottom: 15px;">Tak for din interesse i Bellevue Residence!</h3>
+                <div style="font-size: 48px; color: #d4af37; margin-bottom: 20px;">📞</div>
+                <h3 style="color: #d4af37; margin-bottom: 15px;">Kontakt Bellevue Residence</h3>
                 <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px; line-height: 1.6;">
-                    Du overvejer en klog beslutning med projekterede 11,7% årlige lejeindtægter og 66,3% forventet værditilvækst over 3 år.
+                    Vil du vide mere om Bellevue Residence? Kontakt vores eksperter for personlig rådgivning.
                 </p>
                 <div style="background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; padding: 20px; margin: 20px 0;">
-                    <p style="color: #d4af37; font-weight: bold; margin-bottom: 10px;">Betalingsplan:</p>
+                    <p style="color: #d4af37; font-weight: bold; margin-bottom: 10px;">Vi kan hjælpe med:</p>
                     <p style="color: rgba(255,255,255,0.8); font-size: 14px;">
-                        • 1. rate: 50% ved kontraktunderskrift<br>
-                        • 2. rate: 20% december 2025<br>
-                        • 3. rate: 20% juli 2026<br>
-                        • Sidste rate: 10% ved færdiggørelse januar 2027
+                        • Ejendomsvisning og enhedsvalg<br>
+                        • Detaljeret transaktionsanalyse<br>
+                        • Finansieringsmuligheder<br>
+                        • Juridisk rådgivning og kontrakter
                     </p>
                 </div>
                 <button onclick="closeDialog()" style="background: #d4af37; color: #000; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; text-transform: uppercase;">
@@ -618,82 +619,27 @@ document.addEventListener('DOMContentLoaded', function() {
             `
         );
         
-        console.log('Ejendoms interesse registreret for Bellevue Residence');
-    }
-
-    function showConsultationDialog() {
-        console.log('Åbner konsultation booking dialog...');
-        const dialog = createStyledDialog(
-            'Book transaktionsanalyse',
-            `
-            <div style="text-align: center; padding: 20px;">
-                <div style="font-size: 48px; color: #16a085; margin-bottom: 20px;">Konsultation</div>
-                <h3 style="color: #16a085; margin-bottom: 15px;">Book personlig transaktionsanalyse</h3>
-                <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px; line-height: 1.6;">
-                    Lad vores eksperter guide dig gennem den detaljerede transaktionsanalyse for Bellevue Residence.
-                </p>
-                <div style="background: rgba(22, 160, 133, 0.1); border: 1px solid rgba(22, 160, 133, 0.3); border-radius: 12px; padding: 20px; margin: 20px 0;">
-                    <p style="color: #16a085; font-weight: bold; margin-bottom: 10px;">Inkluderer:</p>
-                    <p style="color: rgba(255,255,255,0.8); font-size: 14px;">
-                        • Detaljeret gennemgang af 11,7% årlige lejeindtægter<br>
-                        • 66,3% værditilvækst over 3 år<br>
-                        • Risikoevaluering og markedsanalyse<br>
-                        • Projekt 50% færdigstillet - risikominimering
-                    </p>
-                </div>
-                <button onclick="closeDialog()" style="background: #16a085; color: #fff; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; text-transform: uppercase;">
-                    Luk
-                </button>
-            </div>
-            `
-        );
-    }
-
-    function showMeetingDialog() {
-        console.log('Åbner møde booking dialog...');
-        const dialog = createStyledDialog(
-            'Book møde',
-            `
-            <div style="text-align: center; padding: 20px;">
-                <div style="font-size: 48px; color: #d4af37; margin-bottom: 20px;">Møde</div>
-                <h3 style="color: #d4af37; margin-bottom: 15px;">Book personligt møde</h3>
-                <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px; line-height: 1.6;">
-                    Mød vores eksperter ansigt til ansigt for en dybdegående gennemgang af Bellevue Residence.
-                </p>
-                <div style="background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; padding: 20px; margin: 20px 0;">
-                    <p style="color: #d4af37; font-weight: bold; margin-bottom: 10px;">Mødet inkluderer:</p>
-                    <p style="color: rgba(255,255,255,0.8); font-size: 14px;">
-                        • Projektgennemgang med 3D visualiseringer<br>
-                        • Live transaktionsanalyse<br>
-                        • Besigtigelse af lignende enheder<br>
-                        • Personlig rådgivning om betalingsplan
-                    </p>
-                </div>
-                <button onclick="closeDialog()" style="background: #d4af37; color: #000; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; text-transform: uppercase;">
-                    Luk
-                </button>
-            </div>
-            `
-        );
+        console.log('Kontakt interesse registreret for Bellevue Residence');
     }
 
     function showBrochureDialog() {
-        console.log('Åbner brochure download dialog...');
+        console.log('Åbner brochure dialog...');
         const dialog = createStyledDialog(
-            'Brochure',
+            'Download brochure',
             `
             <div style="text-align: center; padding: 20px;">
                 <div style="font-size: 48px; color: #16a085; margin-bottom: 20px;">📋</div>
-                <h3 style="color: #16a085; margin-bottom: 15px;">Download brochure</h3>
+                <h3 style="color: #16a085; margin-bottom: 15px;">Få den komplette brochure</h3>
                 <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px; line-height: 1.6;">
-                    Få den komplette brochure med alle detaljer om Bellevue Residence direkte til din email.
+                    Download den detaljerede brochure med alle informationer om Bellevue Residence.
                 </p>
                 <div style="background: rgba(22, 160, 133, 0.1); border: 1px solid rgba(22, 160, 133, 0.3); border-radius: 12px; padding: 20px; margin: 20px 0;">
                     <p style="color: #16a085; font-weight: bold; margin-bottom: 10px;">Brochuren indeholder:</p>
                     <p style="color: rgba(255,255,255,0.8); font-size: 14px;">
-                        • Komplet transaktionsanalyse<br>
-                        • Højkvalitets billeder og plantegninger<br>
-                        • Detaljeret markedsanalyse<br>
+                        • Komplet transaktionsanalyse (€143.000)<br>
+                        • Projekterede 11,7% årlige lejeindtægter<br>
+                        • 66,3% værditilvækst over 3 år<br>
+                        • Plantegninger og højkvalitetsbilleder<br>
                         • Juridiske vilkår og betalingsplan
                     </p>
                 </div>
@@ -776,5 +722,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    console.log('Bellevue Residence app indlæst med alle finale features');
+    console.log('Bellevue Residence app indlæst med korrigerede charts og pricing');
 });
