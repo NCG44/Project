@@ -2719,3 +2719,26 @@ em {
   margin-left: auto;
   margin-right: auto;
 }
+
+/* Fix calculation grid alignment in Lejeindtægt section */
+.calculation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-lg);
+  margin: var(--space-lg) 0;
+}
+
+/* Fix comparison grid alignment */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-lg);
+  margin: var(--space-lg) 0;
+}
+
+/* Override content-wrapper constraint for grid sections */
+.calculation-grid,
+.comparison-grid {
+  max-width: none;
+  width: 100%;
+}
