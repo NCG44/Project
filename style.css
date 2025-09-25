@@ -2700,31 +2700,44 @@ em {
 }
 
 
-/* Image size adjustments to match chart containers */
-.rental-image-container {
+/* Off-plan image alignment - stretch to match timing boxes above */
+.position-image-container {
     height: auto;
-    min-height: 300px;
+    min-height: 250px;
     width: 100%;
     max-width: 100%;
+    margin-top: var(--space-lg);
 }
 
-.rental-image-container img {
+.position-image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
 }
 
-.growth-image-container {
+.positioning-image {
+    width: 100%;
+    margin-top: var(--space-xl);
+}
+
+
+/* Markedsposition image alignment - stretch to match other boxes in section */
+.opportunity-image-container {
     height: auto;
     min-height: 300px;
     width: 100%;
     max-width: 100%;
 }
 
-.growth-image-container img {
+.opportunity-image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
+}
+
+.final-opportunity-image {
+    width: 100%;
+    margin-top: var(--space-xl);
 }
