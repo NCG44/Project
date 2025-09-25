@@ -1438,7 +1438,7 @@ em {
 }
 
 .problem-item::before {
-  content: '•';
+  content: 'â€¢';
   position: absolute;
   left: 0;
   color: var(--color-danger);
@@ -1446,7 +1446,7 @@ em {
 }
 
 .advantage-item::before {
-  content: '•';
+  content: 'â€¢';
   position: absolute;
   left: 0;
   color: var(--color-success);
@@ -1939,7 +1939,7 @@ em {
 }
 
 .scenario-assumptions li::before {
-  content: '•';
+  content: 'â€¢';
   position: absolute;
   left: 0;
   color: var(--color-primary);
@@ -2346,7 +2346,7 @@ em {
 }
 
 .factor.pro li::before {
-  content: '✓';
+  content: 'âœ“';
   position: absolute;
   left: 0;
   color: var(--color-success);
@@ -2354,7 +2354,7 @@ em {
 }
 
 .factor.con li::before {
-  content: '⚠';
+  content: 'âš ';
   position: absolute;
   left: 0;
   color: var(--color-warning);
