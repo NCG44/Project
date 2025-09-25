@@ -2713,3 +2713,10 @@ em {
     box-shadow: none;
   }
 }
+
+/* Apply Bellevue Residence width constraints to all sections */
+.content-wrapper {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
