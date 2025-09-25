@@ -1438,7 +1438,7 @@ em {
 }
 
 .problem-item::before {
-  content: 'â€¢';
+  content: '•';
   position: absolute;
   left: 0;
   color: var(--color-danger);
@@ -1446,7 +1446,7 @@ em {
 }
 
 .advantage-item::before {
-  content: 'â€¢';
+  content: '•';
   position: absolute;
   left: 0;
   color: var(--color-success);
@@ -1939,7 +1939,7 @@ em {
 }
 
 .scenario-assumptions li::before {
-  content: 'â€¢';
+  content: '•';
   position: absolute;
   left: 0;
   color: var(--color-primary);
@@ -2346,7 +2346,7 @@ em {
 }
 
 .factor.pro li::before {
-  content: 'âœ“';
+  content: '✓';
   position: absolute;
   left: 0;
   color: var(--color-success);
@@ -2354,7 +2354,7 @@ em {
 }
 
 .factor.con li::before {
-  content: 'âš ';
+  content: '⚠';
   position: absolute;
   left: 0;
   color: var(--color-warning);
@@ -2697,4 +2697,34 @@ em {
     color: black;
     box-shadow: none;
   }
+}
+
+
+/* Image size adjustments to match chart containers */
+.rental-image-container {
+    height: auto;
+    min-height: 300px;
+    width: 100%;
+    max-width: 100%;
+}
+
+.rental-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.growth-image-container {
+    height: auto;
+    min-height: 300px;
+    width: 100%;
+    max-width: 100%;
+}
+
+.growth-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
