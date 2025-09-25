@@ -469,9 +469,20 @@ em {
 .key-metrics-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-xl);
-  margin: var(--space-xl) 0;
+  gap: var(--space-lg);
+  margin: var(--space-xl) auto;
   width: 100%;
+  max-width: 1000px;
+}
+
+/* Limit width for other section boxes */
+.calculation-grid,
+.comparison-grid,
+.demand-grid,
+.reality-grid {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .metric-card {
