@@ -2397,8 +2397,8 @@ em {
 .growth-image-container,
 .position-image-container,
 .opportunity-image-container {
-  width: 100%;
-  max-width: 800px;
+  width: 80%;
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 }
