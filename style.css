@@ -469,8 +469,9 @@ em {
 .key-metrics-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
+  gap: var(--space-xl);
   margin: var(--space-xl) 0;
+  width: 100%;
 }
 
 .metric-card {
