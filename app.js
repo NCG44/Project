@@ -5,24 +5,24 @@ document.addEventListener('DOMContentLoaded', function() {
         rental_projections: {
             years: ['2027', '2028', '2029'],
             accumulated_income: [16860, 33720, 50580],
-            annual_yield: 11.7,
+            annual_yield: 9.9,
             net_annual: 16860
         },
         growth_timeline: {
             periods: ['Køb (2025)', 'Off-plan (2026)', 'Færdiggørelse Q1 2027', 'År 2 (2028)', 'År 3 (2029)'],
-            property_value: [143000, 143000, 187333, null, null],
+            property_value: [170000, 170000, 210750, null, null],
             accumulated_rental: [0, 0, 16860, 33720, 50580],
-            total_return: 89913,
-            total_return_percentage: 66.3
+            total_return: 91330,
+            total_return_percentage: 53.7
         },
         fdi_data: {
             years: ['2019', '2020', '2021', '2022', '2023', '2024'],
             fdi_amounts: [487, 356, 625, 758, 892, 1050]
         },
         investment: {
-            amount: 143000,
-            exit_price: 187333,
-            discounting_factor: 9
+            amount: 170000,
+            exit_price: 210750,
+            discounting_factor: 8
         }
     };
 
@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Animate the percentage
                 const percentage = highlight.querySelector('.projection-range');
                 if (percentage) {
-                    animatePercentage(percentage, 11.7, 2000);
+                    animatePercentage(percentage, 9.9, 2000);
                 }
             }, 400);
         }
@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Animate the percentage
                 const percentage = growthBox.querySelector('.growth-percentage');
                 if (percentage) {
-                    animatePercentage(percentage, 66.3, 2500);
+                    animatePercentage(percentage, 53.7, 2500);
                 }
             }, 400);
         }
